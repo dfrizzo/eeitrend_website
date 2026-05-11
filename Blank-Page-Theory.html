@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blank Page Theory | EEITREND</title>
+    <meta name="description" content="A first-principles approach to technology strategy and organizational transformation – David Rizzo / EEITREND.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0B2A4A;
+            --bg-alt: rgba(255,255,255,0.02);
+            --bg-card: rgba(255,255,255,0.04);
+            --gold: #d4af37;
+            --gold-light: #f0c84a;
+            --gold-dim: #b8942e;
+            --gold-subtle: rgba(212,175,55,0.12);
+            --border: rgba(212,175,55,0.22);
+            --text-body: rgba(212,175,55,0.78);
+            --nav-h: 72px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--gold);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle at 15% 50%, rgba(212,175,55,0.07) 0%, transparent 50%),
+                radial-gradient(circle at 85% 20%, rgba(244,208,63,0.05) 0%, transparent 50%);
+            animation: bgShift 28s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes bgShift {
+            0%,100% { transform: translate(0,0) rotate(0deg); }
+            33%      { transform: translate(3%,5%) rotate(60deg); }
+            66%      { transform: translate(-3%,3%) rotate(120deg); }
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-h);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 3rem;
+            background: rgba(11,42,74,0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: var(--gold); text-decoration: none; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s, color 0.2s; }
+        .nav-links a:hover { opacity: 1; color: var(--gold-light); }
+        .nav-cta { padding: 0.45rem 1.2rem; border: 1px solid var(--border); opacity: 1 !important; }
+        .nav-cta:hover { background: var(--gold-subtle) !important; border-color: var(--gold) !important; }
+        .hamburger { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+
+        /* SHARED */
+        section { position: relative; z-index: 10; }
+        .section-inner { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+        .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.75rem; }
+        .section-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; color: var(--gold); line-height: 1.2; margin-bottom: 1.25rem; }
+        .gold-rule { width: 56px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin-bottom: 2rem; }
+
+        /* PAGE HERO */
+        .page-hero {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: calc(var(--nav-h) + 4rem) 2rem 5rem;
+            position: relative;
+        }
+
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 10%; right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .page-hero-inner { max-width: 1000px; margin: 0 auto; width: 100%; }
+
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--gold-dim); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3rem; transition: color 0.2s; opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards; }
+        .back-link:hover { color: var(--gold); }
+
+        .page-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+
+        .page-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2.75rem, 8vw, 6rem);
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.35s forwards;
+        }
+
+        .page-subtitle { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--text-body); line-height: 1.7; max-width: 620px; opacity: 0; animation: fadeUp 1s ease 0.55s forwards; }
+
+        /* PULLQUOTE */
+        .pullquote {
+            padding: 5rem 2rem;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .pullquote-inner {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 3.5rem 3rem;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .pullquote-inner::before,
+        .pullquote-inner::after {
+            content: '';
+            position: absolute;
+            width: 40px; height: 40px;
+            border-color: var(--gold);
+            border-style: solid;
+        }
+
+        .pullquote-inner::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+        .pullquote-inner::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+        .pullquote blockquote {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-style: italic;
+            font-weight: 400;
+            color: var(--gold);
+            line-height: 1.6;
+        }
+
+        /* CONTENT */
+        .content-section { padding: 6rem 2rem; }
+        .content-section.alt { background: linear-gradient(180deg, transparent 0%, var(--bg-alt) 50%, transparent 100%); }
+
+        .body-text p { font-size: 1.05rem; line-height: 1.85; color: var(--text-body); margin-bottom: 1.5rem; }
+
+        /* FRAMEWORK STEPS */
+        .framework {
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .framework-step {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 2rem;
+            padding: 2.5rem 0;
+            border-bottom: 1px solid var(--border);
+            align-items: start;
+        }
+
+        .framework-step:last-child { border-bottom: none; }
+
+        .step-num {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: rgba(212,175,55,0.2);
+            line-height: 1;
+            padding-top: 0.2rem;
+        }
+
+        .step-content {}
+        .step-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.35rem; font-weight: 600; color: var(--gold); margin-bottom: 0.75rem; }
+        .step-desc { font-size: 0.97rem; line-height: 1.8; color: var(--text-body); }
+
+        /* WHEN TO USE */
+        .signals-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .signal {
+            display: flex;
+            gap: 1rem;
+            padding: 1.75rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            align-items: flex-start;
+        }
+
+        .signal-mark {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            color: var(--gold-dim);
+            margin-top: 0.1rem;
+        }
+
+        .signal-text { font-size: 0.95rem; line-height: 1.7; color: var(--text-body); }
+
+        /* CTA */
+        .cta-strip { padding: 6rem 2rem; text-align: center; }
+        .cta-strip .section-title { margin-bottom: 1rem; }
+        .cta-strip p { font-size: 1.05rem; color: var(--text-body); max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.7; }
+        .cta-actions { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
+
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; }
+        .btn-primary { background: var(--gold); color: var(--bg); border: 2px solid var(--gold); }
+        .btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,175,55,0.28); }
+        .btn-outline { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
+        .btn-outline:hover { background: var(--gold-subtle); transform: translateY(-2px); }
+
+        /* FOOTER */
+        footer { position: relative; z-index: 10; border-top: 1px solid var(--border); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; }
+        .footer-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .footer-copy { font-size: 0.8rem; color: var(--gold-dim); }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            nav { padding: 0 1.5rem; }
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: rgba(11,42,74,0.98); padding: 2rem 1.5rem; gap: 1.5rem; border-bottom: 1px solid var(--border); z-index: 199; }
+            .signals-grid { grid-template-columns: 1fr; }
+            .framework-step { grid-template-columns: 50px 1fr; gap: 1.25rem; }
+            .pullquote-inner { padding: 2.5rem 1.5rem; }
+            footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="nav-brand">EEITREND</a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">&#9776;</button>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <a href="index.html" class="back-link">&#8592; Back to Home</a>
+            <p class="page-eyebrow">Service &nbsp;·&nbsp; 03</p>
+            <h1 class="page-title">Blank Page<br>Theory</h1>
+            <p class="page-subtitle">A first-principles approach to technology strategy and organizational transformation—for when the weight of legacy thinking is the real obstacle to progress.</p>
+        </div>
+    </div>
+
+    <!-- PULLQUOTE -->
+    <div class="pullquote reveal">
+        <div class="pullquote-inner">
+            <blockquote>"The most dangerous phrase in business is: 'We've always done it this way.' Real transformation begins the moment you're willing to question everything."</blockquote>
+        </div>
+    </div>
+
+    <!-- THE IDEA -->
+    <section class="content-section">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">The Concept</p>
+                <h2 class="section-title">What Is Blank Page Theory?</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <div class="body-text reveal">
+                <p>Blank Page Theory is a discipline of deliberate clarity. It starts with a deceptively simple premise: set aside what exists, and ask what you would build—and how you would build it—if you were starting from zero today.</p>
+                <p>Most organizations don't suffer from a lack of effort. They suffer from an accumulation of decisions that made sense at the time but have since calcified into constraints. Technical debt, org charts that reflect old strategies, processes designed for a smaller company, roadmaps shaped by legacy commitments rather than current priorities. The work becomes maintaining the past rather than building the future.</p>
+                <p>Blank Page Theory is the practice of breaking that cycle. Not by burning everything down—but by deliberately creating space to think without the gravitational pull of incumbency. You envision the right answer first, then map a practical path from where you are to where you need to be.</p>
+                <p>I apply this framework at the intersection of technology strategy, organizational design, and product direction—the areas where the gap between what exists and what's needed tends to be widest, and most costly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FRAMEWORK -->
+    <section class="content-section alt">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">The Framework</p>
+                <h2 class="section-title">How It Works</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <div class="framework">
+                <div class="framework-step reveal">
+                    <div class="step-num">01</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Diagnose Without Defending</h3>
+                        <p class="step-desc">Before anything else, we get honest about the current state—not to assign blame, but to see clearly. What is the technology actually doing? Where does the organization spend its energy? What decisions are being avoided? We document reality without the instinct to justify it.</p>
+                    </div>
+                </div>
+                <div class="framework-step reveal">
+                    <div class="step-num">02</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Envision the Right Answer</h3>
+                        <p class="step-desc">With constraints temporarily suspended, we define what the right technology organization, architecture, or strategy would look like if built today. What would you do differently? What would you keep? This is the blank page—and it becomes your north star.</p>
+                    </div>
+                </div>
+                <div class="framework-step reveal">
+                    <div class="step-num">03</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Bridge the Gap Practically</h3>
+                        <p class="step-desc">Now we bring the constraints back in. Starting from the north star, we work backwards to define a sequenced, achievable path. Not a transformation for transformation's sake—but a purposeful sequence of decisions that moves you toward the right answer without destroying what's working.</p>
+                    </div>
+                </div>
+                <div class="framework-step reveal">
+                    <div class="step-num">04</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Embed the Discipline</h3>
+                        <p class="step-desc">Blank Page Theory isn't a one-time exercise. The organizations that benefit most are the ones that internalize the discipline—regularly stepping back to question whether their current approach still makes sense, before inertia makes the question feel impossible to ask.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIGNALS -->
+    <section class="content-section">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">Is This For You?</p>
+                <h2 class="section-title">Signs You Need This Approach</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <div class="signals-grid">
+                <div class="signal reveal">
+                    <span class="signal-mark">&#9670;</span>
+                    <p class="signal-text">Your roadmap is driven more by what you've committed to than by what the business actually needs right now.</p>
+                </div>
+                <div class="signal reveal">
+                    <span class="signal-mark">&#9670;</span>
+                    <p class="signal-text">Engineering velocity has plateaued and incremental process improvements haven't moved the needle.</p>
+                </div>
+                <div class="signal reveal">
+                    <span class="signal-mark">&#9670;</span>
+                    <p class="signal-text">You've acquired companies whose teams and platforms still operate independently, years after close.</p>
+                </div>
+                <div class="signal reveal">
+                    <span class="signal-mark">&#9670;</span>
+                    <p class="signal-text">Your technology organization was designed for a company you no longer are—and everyone knows it but no one has changed it.</p>
+                </div>
+                <div class="signal reveal">
+                    <span class="signal-mark">&#9670;</span>
+                    <p class="signal-text">New ownership has new expectations and the old playbook doesn't fit the investment thesis.</p>
+                </div>
+                <div class="signal reveal">
+                    <span class="signal-mark">&#9670;</span>
+                    <p class="signal-text">You're preparing for an exit and you know the technology story needs to be stronger before buyers look under the hood.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT IT PRODUCES -->
+    <section class="content-section alt">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">Outcomes</p>
+                <h2 class="section-title">What This Produces</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <div class="body-text reveal">
+                <p>A Blank Page Theory engagement isn't a report that sits on a shelf. It produces decisions—and the clarity to act on them. Depending on where you are, that might look like a technology strategy that resets the direction for the next 12–18 months. It might be an organizational redesign that aligns engineering to the company you're becoming. It might be a platform roadmap that sequences the work of getting from your current architecture to the one you actually need.</p>
+                <p>In every case, the output is something your team can own, execute, and adapt. Not a consultant's framework—a working plan that reflects your specific situation and the people who will implement it.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-strip">
+        <div class="reveal">
+            <p class="section-label">Start the Conversation</p>
+            <h2 class="section-title">Ready to Start from a Blank Page?</h2>
+            <p>If you recognize your organization in what you've read here, let's talk. The hardest part of this work is deciding to do it.</p>
+            <div class="cta-actions">
+                <a href="mailto:david@eeitrend.com" class="btn btn-primary">Email David</a>
+                <a href="index.html#contact" class="btn btn-outline">Contact Page</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <a href="index.html" class="footer-brand">EEITREND</a>
+        <span class="footer-copy">&copy; 2026 David Rizzo. All rights reserved.</span>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks  = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

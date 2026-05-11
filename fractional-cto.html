@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fractional CTO | EEITREND</title>
+    <meta name="description" content="Executive-level technology leadership on a flexible basis for PE-backed and growth-stage software companies – David Rizzo / EEITREND.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0B2A4A;
+            --bg-alt: rgba(255,255,255,0.02);
+            --bg-card: rgba(255,255,255,0.04);
+            --gold: #d4af37;
+            --gold-light: #f0c84a;
+            --gold-dim: #b8942e;
+            --gold-subtle: rgba(212,175,55,0.12);
+            --border: rgba(212,175,55,0.22);
+            --text-body: rgba(212,175,55,0.78);
+            --nav-h: 72px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--gold);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle at 15% 50%, rgba(212,175,55,0.07) 0%, transparent 50%),
+                radial-gradient(circle at 85% 20%, rgba(244,208,63,0.05) 0%, transparent 50%);
+            animation: bgShift 28s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes bgShift {
+            0%,100% { transform: translate(0,0) rotate(0deg); }
+            33%      { transform: translate(3%,5%) rotate(60deg); }
+            66%      { transform: translate(-3%,3%) rotate(120deg); }
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-h);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 3rem;
+            background: rgba(11,42,74,0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: var(--gold); text-decoration: none; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s, color 0.2s; }
+        .nav-links a:hover { opacity: 1; color: var(--gold-light); }
+        .nav-cta { padding: 0.45rem 1.2rem; border: 1px solid var(--border); opacity: 1 !important; }
+        .nav-cta:hover { background: var(--gold-subtle) !important; border-color: var(--gold) !important; }
+        .hamburger { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+
+        /* SHARED */
+        section { position: relative; z-index: 10; }
+        .section-inner { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+        .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.75rem; }
+        .section-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; color: var(--gold); line-height: 1.2; margin-bottom: 1.25rem; }
+        .gold-rule { width: 56px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin-bottom: 2rem; }
+
+        /* PAGE HERO */
+        .page-hero {
+            min-height: 55vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: calc(var(--nav-h) + 4rem) 2rem 5rem;
+            position: relative;
+        }
+
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 10%; right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .page-hero-inner { max-width: 1000px; margin: 0 auto; width: 100%; }
+
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--gold-dim); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3rem; transition: color 0.2s; opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards; }
+        .back-link:hover { color: var(--gold); }
+
+        .page-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+        .page-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 700; color: var(--gold); line-height: 1.1; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 1s ease 0.35s forwards; }
+        .page-subtitle { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--text-body); line-height: 1.7; max-width: 620px; opacity: 0; animation: fadeUp 1s ease 0.55s forwards; }
+
+        /* CONTENT */
+        .content-section { padding: 6rem 2rem; }
+        .content-section.alt { background: linear-gradient(180deg, transparent 0%, var(--bg-alt) 50%, transparent 100%); }
+
+        .body-text p { font-size: 1.05rem; line-height: 1.85; color: var(--text-body); margin-bottom: 1.5rem; }
+
+        /* ENGAGEMENT MODELS */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.75rem;
+            margin-top: 3rem;
+        }
+
+        .model-card {
+            padding: 2.5rem 2rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
+
+        .model-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .model-card:hover {
+            border-color: rgba(212,175,55,0.45);
+            background: rgba(212,175,55,0.06);
+            transform: translateY(-4px);
+        }
+
+        .model-icon {
+            font-size: 2rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .model-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-weight: 600; color: var(--gold); margin-bottom: 0.75rem; }
+        .model-desc { font-size: 0.92rem; line-height: 1.75; color: rgba(212,175,55,0.62); }
+
+        /* USE CASES */
+        .use-case-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .use-case {
+            padding: 2rem;
+            border-left: 2px solid var(--gold-dim);
+            background: var(--bg-card);
+        }
+
+        .use-case-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--gold); margin-bottom: 0.5rem; }
+        .use-case-desc { font-size: 0.92rem; line-height: 1.7; color: rgba(212,175,55,0.62); }
+
+        /* DELIVERABLES LIST */
+        .two-col-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem 3rem;
+            margin-top: 2rem;
+        }
+
+        .two-col-list li { list-style: none; font-size: 0.95rem; line-height: 1.65; color: var(--text-body); padding-left: 1.25rem; position: relative; }
+        .two-col-list li::before { content: '›'; position: absolute; left: 0; color: var(--gold-dim); }
+
+        /* CTA */
+        .cta-strip { padding: 6rem 2rem; text-align: center; }
+        .cta-strip .section-title { margin-bottom: 1rem; }
+        .cta-strip p { font-size: 1.05rem; color: var(--text-body); max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.7; }
+        .cta-actions { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
+
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; }
+        .btn-primary { background: var(--gold); color: var(--bg); border: 2px solid var(--gold); }
+        .btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,175,55,0.28); }
+        .btn-outline { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
+        .btn-outline:hover { background: var(--gold-subtle); transform: translateY(-2px); }
+
+        /* FOOTER */
+        footer { position: relative; z-index: 10; border-top: 1px solid var(--border); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; }
+        .footer-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .footer-copy { font-size: 0.8rem; color: var(--gold-dim); }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* MOBILE */
+        @media (max-width: 900px) { .models-grid { grid-template-columns: 1fr; } .use-case-list { grid-template-columns: 1fr; } .two-col-list { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) {
+            nav { padding: 0 1.5rem; }
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: rgba(11,42,74,0.98); padding: 2rem 1.5rem; gap: 1.5rem; border-bottom: 1px solid var(--border); z-index: 199; }
+            footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="nav-brand">EEITREND</a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">&#9776;</button>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <a href="index.html" class="back-link">&#8592; Back to Home</a>
+            <p class="page-eyebrow">Service &nbsp;·&nbsp; 02</p>
+            <h1 class="page-title">Fractional CTO</h1>
+            <p class="page-subtitle">Executive-level technology leadership on a flexible basis—for companies in transition, between leaders, or scaling faster than their current organization can support.</p>
+        </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <section class="content-section">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">Overview</p>
+                <h2 class="section-title">Senior Leadership Without the Full-Time Commitment</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <div class="body-text reveal">
+                <p>Every company needs technology leadership. Not every company needs—or can support—a full-time CTO at every stage of its journey. Growth-stage companies, PE-backed portfolio companies in transition, and organizations navigating a leadership gap all face the same problem: critical decisions are being made without the executive perspective they deserve.</p>
+                <p>As a Fractional CTO, I provide the strategic technology leadership your company needs—on a schedule and scope that fits your situation. I work alongside your team, not around it. I bring executive presence to investor conversations, credibility to recruiting, and clarity to engineering decisions that shape your product and cost structure for years to come.</p>
+                <p>This is not consulting from the sidelines. It's embedded, accountable leadership calibrated to what you actually need right now.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENGAGEMENT MODELS -->
+    <section class="content-section alt">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">How We Work Together</p>
+                <h2 class="section-title">Engagement Models</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <div class="models-grid">
+                <div class="model-card reveal">
+                    <div class="model-icon">&#9685;</div>
+                    <h3 class="model-title">Part-Time Embedded</h3>
+                    <p class="model-desc">A fixed number of days per week or month. Attend leadership meetings, drive engineering direction, and be accessible to the team. Best for companies that need consistent presence without full-time cost.</p>
+                </div>
+                <div class="model-card reveal">
+                    <div class="model-icon">&#9200;</div>
+                    <h3 class="model-title">Interim CTO</h3>
+                    <p class="model-desc">Full engagement during a leadership transition—between CTOs, post-acquisition, or through a critical scaling period. Provide day-to-day technology leadership while you find and onboard the right permanent hire.</p>
+                </div>
+                <div class="model-card reveal">
+                    <div class="model-icon">&#9654;</div>
+                    <h3 class="model-title">Advisory &amp; Board Support</h3>
+                    <p class="model-desc">Strategic counsel on technology direction, investment decisions, and team structure. Ideal for boards and PE sponsors who need an independent technology voice without an embedded role.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- USE CASES -->
+    <section class="content-section">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">When It Makes Sense</p>
+                <h2 class="section-title">Common Scenarios</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <div class="use-case-list">
+                <div class="use-case reveal">
+                    <h3 class="use-case-title">CTO Departure or Vacancy</h3>
+                    <p class="use-case-desc">Your CTO just left—or wasn't the right fit for the next phase. Keep technology moving forward while you conduct a deliberate, unhurried search for the right permanent leader.</p>
+                </div>
+                <div class="use-case reveal">
+                    <h3 class="use-case-title">PE Ownership Transition</h3>
+                    <p class="use-case-desc">New ownership brings new expectations. I help align the technology organization to the investor's thesis, communicate credibly to the board, and set the right priorities for the hold period.</p>
+                </div>
+                <div class="use-case reveal">
+                    <h3 class="use-case-title">Rapid Scaling</h3>
+                    <p class="use-case-desc">Your engineering team is growing faster than your processes can support. Bring in senior leadership to design the right org structure, hiring plan, and delivery model before chaos sets in.</p>
+                </div>
+                <div class="use-case reveal">
+                    <h3 class="use-case-title">Pre-Exit Preparation</h3>
+                    <p class="use-case-desc">Preparing for a sale or recapitalization? Technology story, team credibility, and platform maturity all affect valuation. I help you present the strongest possible picture to acquirers and investors.</p>
+                </div>
+                <div class="use-case reveal">
+                    <h3 class="use-case-title">Engineering Under-Performance</h3>
+                    <p class="use-case-desc">Delivery is slow, quality is unpredictable, and the team seems stuck. Bring in an experienced leader to diagnose the root causes and drive a turnaround—without replacing everyone in the org.</p>
+                </div>
+                <div class="use-case reveal">
+                    <h3 class="use-case-title">First-Time CTO Support</h3>
+                    <p class="use-case-desc">A strong technical leader just stepped into their first CTO role. Give them an experienced partner to think alongside—shaping board communications, org decisions, and strategic tradeoffs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT YOU GET -->
+    <section class="content-section alt">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">What You Get</p>
+                <h2 class="section-title">Areas of Focus</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <ul class="two-col-list reveal">
+                <li>Technology strategy &amp; roadmap definition</li>
+                <li>Engineering org design &amp; team structure</li>
+                <li>Hiring and talent assessment</li>
+                <li>Delivery model &amp; agile practices</li>
+                <li>Board &amp; investor communications</li>
+                <li>Vendor and platform evaluation</li>
+                <li>Architecture direction &amp; technical debt</li>
+                <li>AI adoption strategy</li>
+                <li>Cost optimization &amp; COGS reduction</li>
+                <li>Culture and accountability frameworks</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-strip">
+        <div class="reveal">
+            <p class="section-label">Let's Talk</p>
+            <h2 class="section-title">Is a Fractional CTO Right for You?</h2>
+            <p>Every engagement starts with a conversation. Tell me where you are and what you're trying to solve—I'll tell you honestly whether I can help.</p>
+            <div class="cta-actions">
+                <a href="mailto:david@eeitrend.com" class="btn btn-primary">Email David</a>
+                <a href="index.html#contact" class="btn btn-outline">Contact Page</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <a href="index.html" class="footer-brand">EEITREND</a>
+        <span class="footer-copy">&copy; 2026 David Rizzo. All rights reserved.</span>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks  = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
