@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Word / Office temporary lock files (created while a file is open)
+~$*
+
+# Editor / OS junk
+*.swp
+Thumbs.db
