@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Mainframe Isn't Going Anywhere — And That's Exactly Why AI Matters | EEITREND</title>
+    <meta name="description" content="Why the mainframe isn't going anywhere — and why AI matters specifically for the workloads still running on it. David Rizzo on responsible AI adoption in enterprise mainframe environments.">
+    <link rel="canonical" href="https://eeitrend.com/mainframe-and-ai.html">
+
+    <!-- Open Graph / LinkedIn -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="The Mainframe Isn't Going Anywhere — And That's Exactly Why AI Matters">
+    <meta property="og:description" content="Why the mainframe isn't going anywhere — and why AI matters specifically for the workloads still running on it. David Rizzo on responsible AI adoption in enterprise mainframe environments.">
+    <meta property="og:url" content="https://eeitrend.com/mainframe-and-ai.html">
+    <meta property="article:author" content="David Rizzo">
+    <meta property="article:published_time" content="2026-05-13">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0B2A4A;
+            --bg-alt: rgba(255,255,255,0.02);
+            --bg-card: rgba(255,255,255,0.04);
+            --gold: #d4af37;
+            --gold-light: #f0c84a;
+            --gold-dim: #b8942e;
+            --gold-subtle: rgba(212,175,55,0.12);
+            --border: rgba(212,175,55,0.22);
+            --text-body: rgba(212,175,55,0.78);
+            --nav-h: 72px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--gold);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle at 15% 50%, rgba(212,175,55,0.07) 0%, transparent 50%),
+                radial-gradient(circle at 85% 20%, rgba(244,208,63,0.05) 0%, transparent 50%);
+            animation: bgShift 28s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes bgShift {
+            0%,100% { transform: translate(0,0) rotate(0deg); }
+            33%      { transform: translate(3%,5%) rotate(60deg); }
+            66%      { transform: translate(-3%,3%) rotate(120deg); }
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-h);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 3rem;
+            background: rgba(11,42,74,0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: var(--gold); text-decoration: none; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s, color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold-light); }
+        .nav-cta { padding: 0.45rem 1.2rem; border: 1px solid var(--border); opacity: 1 !important; }
+        .nav-cta:hover { background: var(--gold-subtle) !important; border-color: var(--gold) !important; }
+        .hamburger { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+
+        /* ARTICLE */
+        article { position: relative; z-index: 10; padding: calc(var(--nav-h) + 4rem) 2rem 2rem; }
+        .article-inner { max-width: 760px; margin: 0 auto; }
+
+        .article-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 1rem; }
+        .article-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; color: var(--gold); line-height: 1.15; margin-bottom: 1.25rem; }
+        .article-meta { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; font-size: 0.85rem; color: var(--gold-dim); letter-spacing: 0.05em; margin-bottom: 1.5rem; }
+        .article-meta .dot { opacity: 0.5; }
+        .article-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2.5rem; }
+        .article-tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dim); padding: 0.2rem 0.6rem; border: 1px solid var(--border); border-radius: 2px; }
+        .article-lead { font-size: 1.15rem; line-height: 1.65; color: var(--gold); opacity: 0.95; margin-bottom: 2.25rem; font-weight: 400; }
+
+        .gold-rule { width: 60px; height: 2px; background: var(--gold); margin: 2rem 0 2.25rem; }
+
+        .article-body p { font-size: 1.02rem; line-height: 1.8; color: var(--text-body); margin-bottom: 1.4rem; }
+        .article-body p em { color: var(--gold); font-style: italic; }
+        .article-body p strong { color: var(--gold); font-weight: 600; }
+
+        .post-h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.7rem; font-weight: 600; color: var(--gold); line-height: 1.25; margin: 2.75rem 0 1rem; }
+        .post-h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; font-weight: 600; color: var(--gold); line-height: 1.3; margin: 2rem 0 0.8rem; }
+
+        .post-quote { border-left: 2px solid var(--gold); margin: 2rem 0; padding: 0.5rem 0 0.5rem 1.5rem; font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 1.2rem; line-height: 1.55; color: var(--gold); }
+
+        .post-list { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin: 0.5rem 0 1.5rem; }
+        .post-list li { font-size: 1.02rem; line-height: 1.7; color: var(--text-body); padding-left: 1.25rem; position: relative; }
+        .post-list li::before { content: '›'; position: absolute; left: 0; color: var(--gold-dim); }
+
+        .article-body a { color: var(--gold); text-decoration: underline; text-decoration-color: var(--gold-dim); text-underline-offset: 3px; transition: color 0.2s, text-decoration-color 0.2s; }
+        .article-body a:hover { color: var(--gold-light); text-decoration-color: var(--gold-light); }
+
+        .article-bio { font-size: 0.92rem; line-height: 1.7; color: var(--text-body); font-style: italic; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+
+        /* POST FOOTER */
+        .article-footer { margin-top: 3rem; padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .article-footer .btn { display: inline-block; padding: 0.7rem 1.4rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; color: var(--gold); border: 1px solid var(--border); transition: background 0.3s, border-color 0.3s; }
+        .article-footer .btn:hover { background: var(--gold-subtle); border-color: var(--gold); }
+
+        /* FOOTER */
+        footer { position: relative; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 2rem 3rem; border-top: 1px solid var(--border); background: rgba(11,42,74,0.6); }
+        .footer-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .footer-copy { font-size: 0.8rem; color: var(--gold-dim); }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            nav { padding: 0 1.5rem; }
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: rgba(11,42,74,0.98); padding: 2rem 1.5rem; gap: 1.5rem; border-bottom: 1px solid var(--border); z-index: 199; }
+            article { padding: calc(var(--nav-h) + 2.5rem) 1.5rem 2rem; }
+            .article-title { font-size: 1.85rem; }
+            .article-lead { font-size: 1.05rem; }
+            .post-h2 { font-size: 1.4rem; }
+            footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="nav-brand">EEITREND</a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li>
+            <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">&#9776;</button>
+    </nav>
+
+    <!-- ARTICLE -->
+    <article>
+        <div class="article-inner">
+
+            <p class="article-eyebrow">Field Notes</p>
+            <h1 class="article-title">The Mainframe Isn't Going Anywhere &mdash; And That's Exactly Why AI Matters</h1>
+
+            <div class="article-meta">
+                <span>May 13, 2026</span>
+                <span class="dot">&middot;</span>
+                <span>6 min read</span>
+            </div>
+
+            <div class="article-tags">
+                <span class="article-tag">Mainframe</span>
+                <span class="article-tag">AI</span>
+                <span class="article-tag">Enterprise</span>
+            </div>
+
+            <p class="article-lead">
+                More frequently than expected, someone declares the mainframe dead. They've been wrong every time. And now, with enterprise AI reshaping how organizations build, operate, and deliver software, the conversation is shifting again &mdash; not toward replacing the mainframe, but toward something far more interesting: making it smarter.
+            </p>
+
+            <div class="gold-rule"></div>
+
+            <div class="article-body">
+
+                <p>I've spent the better part of three decades working at the intersection of enterprise software, engineering leadership, and technology transformation. Much of my career was deeply rooted in mainframe platforms &mdash; IBM z/OS, COBOL, mission-critical systems running at the heart of the world's largest organizations. I have also spent time leading cloud-native SaaS businesses, PE-backed transformations, and the practical adoption of AI across engineering organizations at scale.</p>
+
+                <p>That combination gives me a perspective that's relatively rare: I don't see the mainframe and modern AI as opposing forces. I see them as a pairing that most organizations haven't figured out yet &mdash; but need to.</p>
+
+                <h2 class="post-h2">Why the Mainframe Is Still Here</h2>
+
+                <p>Let's be direct about something. The mainframe has survived not because organizations are too slow to change, but because it genuinely earns its place.</p>
+
+                <p>The numbers are hard to argue with. The world's largest banks, insurance companies, healthcare systems, and government agencies run their most critical workloads on IBM z/OS. Billions of transactions move through mainframe systems every single day &mdash; with reliability, security, and throughput characteristics that no cloud-native alternative has fully replicated at equivalent scale.</p>
+
+                <p>This isn't nostalgia. It's engineering reality.</p>
+
+                <p>What has changed is the talent landscape. The generation of engineers who grew up building and maintaining these systems is retiring. Organizations are left with deep institutional knowledge embedded in aging codebases and a shrinking pool of people who can read, write, and reason about COBOL at the level those systems require. That's a real and growing risk &mdash; and it's exactly where AI starts to become genuinely valuable.</p>
+
+                <h2 class="post-h2">What AI Actually Offers the Mainframe &mdash; Done Right</h2>
+
+                <p>The hype around AI is loud and often disconnected from execution reality. So let me be specific about where AI creates genuine value in mainframe environments, and where it doesn't.</p>
+
+                <h3 class="post-h3">Where AI delivers</h3>
+
+                <p><em>Code comprehension and documentation.</em> Decades-old COBOL codebases are often poorly documented. Engineers maintain systems they only partially understand, making every change a risk. AI-assisted code analysis can surface logic, dependencies, and behavior that would take a human team months to reconstruct manually. This isn't theoretical &mdash; it's one of the most immediate and practical applications of AI in legacy environments today.</p>
+
+                <p><em>Modernization path analysis.</em> When organizations want to move workloads off the mainframe &mdash; or more accurately, when they want to determine <em>which</em> workloads to move and which to leave &mdash; AI can accelerate the analysis. Understanding code coupling, transaction volumes, and dependency chains at scale is exactly the kind of work where AI earns its place.</p>
+
+                <p><em>Anomaly detection and operational intelligence.</em> Mainframe systems generate enormous amounts of operational data. AI-powered monitoring can identify patterns, surface anomalies, and predict failures in ways that rule-based systems can't. Applying modern observability thinking to mainframe operations is an underexplored opportunity that delivers real reliability improvements.</p>
+
+                <p><em>Developer productivity for a shrinking talent pool.</em> AI-assisted coding tools don't replace mainframe expertise &mdash; but they can extend it. Early-in-career engineers working alongside experienced mainframe practitioners, with AI as a force multiplier, can take on work that would otherwise be inaccessible to them. That's not a workaround; it's a genuine talent strategy.</p>
+
+                <h3 class="post-h3">Where AI doesn't deliver &mdash; yet</h3>
+
+                <p>Wholesale automated migration of mainframe code to cloud-native architectures remains largely aspirational. The tools are improving, but the gap between what AI can generate and what production-grade, regulated-environment software requires is still significant. Organizations that bet on full AI-driven migration without experienced human oversight are taking risks they may not fully understand.</p>
+
+                <h2 class="post-h2">Responsible AI Adoption: What It Actually Means</h2>
+
+                <p>"Responsible AI" has become a phrase that appears in every vendor deck and executive presentation. Most of the time it's decorative. In practice, responsible AI adoption in enterprise environments &mdash; mainframe or otherwise &mdash; comes down to a few concrete disciplines.</p>
+
+                <p><strong>Start with outcomes, not tools.</strong> The question is never "how do we adopt AI?" The question is "what specific problem are we trying to solve, and is AI the right tool for it?" In mainframe environments, the honest answer is sometimes yes and sometimes no. Discipline means being willing to say no.</p>
+
+                <p><strong>Maintain human expertise in the loop.</strong> AI augments experienced engineers; it does not replace them. Any organization that uses AI adoption as a pretext for eliminating mainframe expertise before that knowledge is properly transferred and preserved is creating a technical debt that will be expensive to repay.</p>
+
+                <p><strong>Establish guardrails before you scale.</strong> I've led AI adoption across engineering organizations &mdash; CI/CD pipelines, SRE, code review, customer support &mdash; and the pattern is consistent: organizations that establish governance before they scale AI avoid the painful rollbacks that come from moving too fast without guardrails. This is especially true in regulated industries where mainframe workloads frequently live.</p>
+
+                <p><strong>Measure what matters.</strong> AI-assisted development should improve delivery predictability, reduce defect rates, and shorten cycle times. If you can't measure the impact, you don't actually know if it's working. Baseline before you deploy, measure after, and be honest about what the data shows.</p>
+
+                <p><strong>Treat security as non-negotiable.</strong> Mainframe environments frequently process regulated data &mdash; financial records, health information, personally identifiable information at scale. Any AI tooling introduced into those environments must meet the same security and compliance standards as the systems themselves. This includes understanding what data AI tools are trained on, what data they have access to, and where outputs go.</p>
+
+                <h2 class="post-h2">The Hybrid Future Nobody Talks About</h2>
+
+                <p>The real opportunity in most large enterprises isn't replacing the mainframe. It's building an intelligent bridge between mainframe workloads and modern cloud-native systems &mdash; a hybrid architecture where each tier does what it does best.</p>
+
+                <p>The mainframe handles high-volume, high-reliability transactional processing at the core. Cloud-native systems handle modern application delivery, analytics, and customer-facing experiences at the edge. AI operates as the connective tissue &mdash; processing data, surfacing insights, and enabling the kind of real-time decision-making that neither tier could deliver alone.</p>
+
+                <p>This isn't a vision. It's what leading financial institutions and healthcare systems are already building. The organizations that figure it out earliest will have a significant operational and competitive advantage.</p>
+
+                <h2 class="post-h2">What This Means for Technology Leaders</h2>
+
+                <p>If you're a CTO, VP of Engineering, or technology executive at an organization running mainframe workloads, the question isn't whether AI matters to you. It does. The question is whether you're approaching it with the seriousness and discipline it requires.</p>
+
+                <p>A few things I'd encourage you to think about:</p>
+
+                <p><strong>Do you have a clear picture of your mainframe risk?</strong> Skills attrition, code complexity, and dependency debt are real and growing. AI can help you understand that picture &mdash; but only if you look.</p>
+
+                <p><strong>Is your AI strategy mainframe-inclusive?</strong> Most AI adoption roadmaps are built with cloud-native assumptions. If your most critical workloads run on z/OS, your AI strategy should account for them explicitly.</p>
+
+                <p><strong>Are you building capability or creating dependency?</strong> AI tools should be building your team's capacity to understand and evolve your systems, not creating new black boxes layered on top of old ones.</p>
+
+                <p>The mainframe has earned its place through decades of reliability. AI has the potential to extend that value significantly &mdash; if it's adopted thoughtfully, governed responsibly, and led by people who understand both sides of the equation.</p>
+
+                <p>That combination is rarer than it should be. And it's exactly where the real work is.</p>
+
+                <p class="article-bio">David Rizzo is a technology executive and CTO with experience leading enterprise software, cybersecurity SaaS, and mainframe engineering organizations. He advises PE-backed software companies and enterprise technology leaders through EEITREND. Connect at <a href="https://www.eeitrend.com">eeitrend.com</a> or on <a href="https://www.linkedin.com/in/davidrizzo1" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
+
+            </div>
+
+            <div class="article-footer">
+                <a href="blog.html" class="btn">&#8592; All posts</a>
+                <a href="index.html#contact" class="btn">Get in touch</a>
+            </div>
+
+        </div>
+    </article>
+
+    <!-- FOOTER -->
+    <footer>
+        <a href="index.html" class="footer-brand">EEITREND</a>
+        <span class="footer-copy">&copy; 2026 David Rizzo. All rights reserved.</span>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks  = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+    </script>
+</body>
+</html>
