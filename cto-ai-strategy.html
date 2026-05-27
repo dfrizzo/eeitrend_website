@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>You're Already Behind: A CTO's Unfiltered Guide to AI That Actually Works | EEITREND</title>
+    <meta name="description" content="If you don't have measurable ROI from AI today, you are behind. Not conceptually — competitively. A CTO's ground-level view of where AI actually works, where it fails, and how to close the gap.">
+    <link rel="canonical" href="https://eeitrend.com/cto-ai-strategy.html">
+
+    <!-- Open Graph / LinkedIn -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="You're Already Behind: A CTO's Unfiltered Guide to AI That Actually Works">
+    <meta property="og:description" content="If you don't have measurable ROI from AI today, you are behind. Not conceptually — competitively. A CTO's ground-level view of where AI actually works, where it fails, and how to close the gap.">
+    <meta property="og:url" content="https://eeitrend.com/cto-ai-strategy.html">
+    <meta property="article:author" content="David Rizzo">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0B2A4A;
+            --bg-alt: rgba(255,255,255,0.02);
+            --bg-card: rgba(255,255,255,0.04);
+            --gold: #d4af37;
+            --gold-light: #f0c84a;
+            --gold-dim: #b8942e;
+            --gold-subtle: rgba(212,175,55,0.12);
+            --border: rgba(212,175,55,0.22);
+            --text-body: rgba(212,175,55,0.78);
+            --nav-h: 72px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--gold);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle at 15% 50%, rgba(212,175,55,0.07) 0%, transparent 50%),
+                radial-gradient(circle at 85% 20%, rgba(244,208,63,0.05) 0%, transparent 50%);
+            animation: bgShift 28s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes bgShift {
+            0%,100% { transform: translate(0,0) rotate(0deg); }
+            33%      { transform: translate(3%,5%) rotate(60deg); }
+            66%      { transform: translate(-3%,3%) rotate(120deg); }
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-h);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 3rem;
+            background: rgba(11,42,74,0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: var(--gold); text-decoration: none; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s, color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold-light); }
+        .nav-cta { padding: 0.45rem 1.2rem; border: 1px solid var(--border); opacity: 1 !important; }
+        .nav-cta:hover { background: var(--gold-subtle) !important; border-color: var(--gold) !important; }
+        .hamburger { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+
+        /* ARTICLE */
+        article { position: relative; z-index: 10; padding: calc(var(--nav-h) + 4rem) 2rem 2rem; }
+        .article-inner { max-width: 760px; margin: 0 auto; }
+
+        .article-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 1rem; }
+        .article-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; color: var(--gold); line-height: 1.15; margin-bottom: 0.75rem; }
+        .article-subtitle { font-size: 1.1rem; line-height: 1.6; color: var(--text-body); margin-bottom: 1.5rem; }
+        .article-meta { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; font-size: 0.85rem; color: var(--gold-dim); letter-spacing: 0.05em; margin-bottom: 1.5rem; }
+        .article-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2.5rem; }
+        .article-tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dim); padding: 0.2rem 0.6rem; border: 1px solid var(--border); border-radius: 2px; }
+
+        .gold-rule { width: 60px; height: 2px; background: var(--gold); margin: 2rem 0 2.25rem; }
+
+        .article-body p { font-size: 1.02rem; line-height: 1.8; color: var(--text-body); margin-bottom: 1.4rem; }
+        .article-body p em { color: var(--gold); font-style: italic; }
+        .article-body p strong { color: var(--gold); font-weight: 600; }
+
+        .post-h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.7rem; font-weight: 600; color: var(--gold); line-height: 1.25; margin: 2.75rem 0 1rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+
+        /* PULL QUOTE */
+        .post-quote {
+            border-left: 2px solid var(--gold);
+            margin: 2.5rem 0;
+            padding: 0.75rem 0 0.75rem 1.5rem;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--gold);
+        }
+
+        /* CALLOUT BOX */
+        .callout {
+            border: 1px solid var(--border);
+            border-top: 2px solid var(--gold);
+            background: var(--bg-card);
+            padding: 1.5rem 1.75rem;
+            margin: 2rem 0;
+        }
+        .callout-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            margin-bottom: 0.75rem;
+        }
+        .callout p { margin: 0; font-size: 0.98rem; color: var(--text-body); }
+        .callout p strong { color: var(--gold); }
+
+        /* NUMBERED FAILURE / INSIGHT BLOCKS */
+        .numbered-list { display: flex; flex-direction: column; gap: 1.25rem; margin: 1.75rem 0; }
+        .numbered-item { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1.25rem; align-items: start; }
+        .numbered-item-num {
+            width: 2.25rem; height: 2.25rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+        .numbered-item p { margin: 0; font-size: 1.02rem; line-height: 1.8; color: var(--text-body); }
+        .numbered-item p strong { color: var(--gold); font-weight: 600; }
+
+        /* LAYER CARDS */
+        .layer-grid { display: flex; flex-direction: column; gap: 1.25rem; margin: 1.75rem 0; }
+        .layer-card {
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            padding: 1.5rem 1.75rem;
+        }
+        .layer-tag {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.22rem 0.65rem;
+            border: 1px solid;
+            margin-bottom: 0.65rem;
+        }
+        .tag-high { color: var(--gold); border-color: var(--gold); }
+        .tag-med  { color: var(--gold-dim); border-color: var(--gold-dim); }
+        .tag-long { color: rgba(212,175,55,0.5); border-color: rgba(212,175,55,0.3); }
+        .layer-title { font-size: 1rem; font-weight: 600; color: var(--gold); margin-bottom: 0.5rem; }
+        .layer-card p { margin: 0; font-size: 0.98rem; line-height: 1.75; color: var(--text-body); }
+
+        /* STEP CARDS */
+        .step-grid { display: flex; flex-direction: column; gap: 1.25rem; margin: 1.75rem 0; }
+        .step-card {
+            display: grid;
+            grid-template-columns: 3.5rem 1fr;
+            gap: 1.25rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            padding: 1.5rem;
+            align-items: start;
+        }
+        .step-number {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: rgba(212,175,55,0.2);
+            line-height: 1;
+        }
+        .step-title { font-size: 0.95rem; font-weight: 600; color: var(--gold); margin-bottom: 0.4rem; }
+        .step-body { font-size: 0.97rem; line-height: 1.75; color: var(--text-body); }
+
+        .article-body a { color: var(--gold); text-decoration: underline; text-decoration-color: var(--gold-dim); text-underline-offset: 3px; transition: color 0.2s, text-decoration-color 0.2s; }
+        .article-body a:hover { color: var(--gold-light); text-decoration-color: var(--gold-light); }
+
+        .article-bio { font-size: 0.92rem; line-height: 1.7; color: var(--text-body); font-style: italic; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+
+        /* POST FOOTER */
+        .article-footer { margin-top: 3rem; padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .article-footer .btn { display: inline-block; padding: 0.7rem 1.4rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; color: var(--gold); border: 1px solid var(--border); transition: background 0.3s, border-color 0.3s; }
+        .article-footer .btn:hover { background: var(--gold-subtle); border-color: var(--gold); }
+
+        /* FOOTER */
+        footer { position: relative; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 2rem 3rem; border-top: 1px solid var(--border); background: rgba(11,42,74,0.6); }
+        .footer-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .footer-copy { font-size: 0.8rem; color: var(--gold-dim); }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            nav { padding: 0 1.5rem; }
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: rgba(11,42,74,0.98); padding: 2rem 1.5rem; gap: 1.5rem; border-bottom: 1px solid var(--border); z-index: 199; }
+            article { padding: calc(var(--nav-h) + 2.5rem) 1.5rem 2rem; }
+            .article-title { font-size: 1.85rem; }
+            .post-h2 { font-size: 1.4rem; }
+            .step-card { grid-template-columns: 1fr; }
+            .numbered-item { grid-template-columns: 1fr; }
+            footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="nav-brand">EEITREND</a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li>
+            <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">&#9776;</button>
+    </nav>
+
+    <!-- ARTICLE -->
+    <article>
+        <div class="article-inner">
+
+            <p class="article-eyebrow">Thought Leadership &middot; AI Strategy</p>
+            <h1 class="article-title">You're Already Behind: A CTO's Unfiltered Guide to AI That Actually Works</h1>
+            <p class="article-subtitle">If you don't have measurable ROI from AI today, you are behind. Not conceptually &mdash; competitively. The view from inside the machine.</p>
+
+            <div class="article-meta">
+                <span>9 min read</span>
+            </div>
+
+            <div class="article-tags">
+                <span class="article-tag">AI Strategy</span>
+                <span class="article-tag">CTO</span>
+                <span class="article-tag">Leadership</span>
+            </div>
+
+            <div class="gold-rule"></div>
+
+            <div class="article-body">
+
+                <p>The boardroom conversation about AI has been the same for two years: <strong>"What's our AI strategy?"</strong> And for two years, most CTOs have been answering with pilot programs, vendor evaluations, and innovation theater &mdash; dressed up as strategy.</p>
+
+                <p>Let me be direct: if you don't have measurable ROI from AI today, you are behind. Not conceptually behind. Competitively behind. And the gap is widening every quarter.</p>
+
+                <p>I've implemented AI across three distinct surfaces in an organization &mdash; in products, inside the software development lifecycle, and across business functions. I've seen what works, what fails, and more importantly, <em>why</em> it fails. This isn't theory. This is the view from inside the machine.</p>
+
+                <h2 class="post-h2">The Lie That's Costing You the Most</h2>
+
+                <p>Let's start with the most dangerous belief circulating in executive circles right now:</p>
+
+                <blockquote class="post-quote">AI can be used by anyone to do anything.</blockquote>
+
+                <p>It can't. And believing it will cost you &mdash; in money, in time, and in the credibility of your AI program. The democratization narrative is seductive. The tools are approachable. The demos are impressive. And vendors have every incentive to tell you that anyone can be a builder now.</p>
+
+                <p>But there is a fundamental difference between <em>producing code</em> and <em>writing software</em>. AI lowered the barrier to the former. It did not touch the latter.</p>
+
+                <p>I witnessed this firsthand. An experiment: put AI coding tools in the hands of non-developers and ask them to build. Here is exactly what happened:</p>
+
+                <div class="numbered-list">
+                    <div class="numbered-item">
+                        <div class="numbered-item-num">1</div>
+                        <p><strong>No architectural foundation.</strong> They started generating code without a defined architecture or strategy. Every prompt was a local decision with no global awareness. No data model, no separation of concerns, no thought given to scalability or maintainability. They were building a house by asking an AI to place bricks &mdash; one at a time, with no blueprint.</p>
+                    </div>
+                    <div class="numbered-item">
+                        <div class="numbered-item-num">2</div>
+                        <p><strong>Technical debt that was invisible to them.</strong> The code ran. It looked like progress. But no one in the room could identify redundant logic, unneeded functions, inefficient queries, or missing reusability patterns. AI doesn't self-edit for elegance &mdash; it generates what you ask for. If you don't know what good looks like, you cannot prompt for it. And you certainly cannot review for it.</p>
+                    </div>
+                    <div class="numbered-item">
+                        <div class="numbered-item-num">3</div>
+                        <p><strong>No one modeled the runtime cost.</strong> Non-developers don't think in compute costs. They don't know that an inefficient query, an unindexed table, or a redundant API call has a dollar figure attached to every execution. The team built something that technically worked and was financially unviable.</p>
+                    </div>
+                </div>
+
+                <p>The project was sunsetted. Hundreds of hours of work. Tens of thousands of dollars in compute. Gone.</p>
+
+                <div class="callout">
+                    <div class="callout-label">The Hard Truth</div>
+                    <p>AI in the hands of a non-developer doesn't create a developer. It creates the illusion of one &mdash; with none of the judgment and all of the confidence.</p>
+                </div>
+
+                <h2 class="post-h2">Where the Real ROI Lives</h2>
+
+                <p>If you want to build your AI business case on solid ground, start in the <strong>software development lifecycle</strong>. Of the three deployment surfaces I've worked across, this one delivers the clearest, most demonstrable, and most measurable return.</p>
+
+                <p>Why? Because the feedback loop is honest. Code runs or it doesn't. Pull requests get merged or rejected. You can instrument everything &mdash; cycle time, defect rates, time to first commit, story velocity. The signal is clean and the value is visible quickly.</p>
+
+                <p>But I want to be equally honest about something most AI enthusiasm conveniently omits: <strong>there is a real cost to using AI in the SDLC.</strong></p>
+
+                <p><strong>Technical debt velocity.</strong> AI accelerates code generation. Without disciplined oversight, it also accelerates the accumulation of technical debt. Engineers &mdash; particularly less senior ones &mdash; will accept AI output without fully understanding it. If your review culture was weak before AI, AI will make it worse, faster.</p>
+
+                <p><strong>Licensing and runtime compute costs.</strong> The math has to close. AI tooling carries a real per-seat, per-token cost. More importantly, the code your team ships will have a runtime cost profile shaped by how well your engineers understand what they're generating. Bad habits at the keyboard become expensive infrastructure bills at scale.</p>
+
+                <p>The answer isn't to slow down. It's to instrument, govern, and hold the line on review standards.</p>
+
+                <h2 class="post-h2">The Model That Actually Works</h2>
+
+                <p>Here is the most provocative operational insight I can offer, because it inverts conventional wisdom:</p>
+
+                <blockquote class="post-quote">AI doesn't expand who can do technical work. It deepens what a technical person can do.</blockquote>
+
+                <p>The right model is not a large team of specialists, each with an AI assistant. It is a smaller team of strong technical generalists, each empowered by AI to operate across a wider surface than was previously possible.</p>
+
+                <p>Concretely: a single skilled technical person, equipped with the right AI tools, can own both the <strong>product management function</strong> &mdash; requirements gathering, user story definition, prioritization &mdash; <em>and</em> the engineering execution. This is not a cost-cutting shortcut. It is a structural advantage. That person holds the full context of what is being built and why, eliminating the translation layer where most software projects lose fidelity.</p>
+
+                <p>What this means for your talent strategy: <strong>you still need senior technical people.</strong> AI doesn't replace the senior engineer &mdash; it makes the senior engineer exponentially more productive. What it does challenge is the case for coordination layers that exist to manage the gap between business intent and technical execution. AI closes that gap better than process does.</p>
+
+                <h2 class="post-h2">A Framework for the Three Layers</h2>
+
+                <p>Not all AI deployments are the same. Each surface &mdash; product, SDLC, and business functions &mdash; has a different ROI model, risk profile, and change management requirement.</p>
+
+                <div class="layer-grid">
+                    <div class="layer-card">
+                        <div class="layer-tag tag-high">Highest ROI &middot; Start Here</div>
+                        <div class="layer-title">Layer 1 &mdash; Software Development Lifecycle</div>
+                        <p>Clear metrics, fast feedback, real productivity gains. Govern it rigorously: maintain code review standards, track compute costs against velocity, and keep senior engineers reviewing AI-generated output as an active quality gate &mdash; not a bureaucratic step.</p>
+                    </div>
+                    <div class="layer-card">
+                        <div class="layer-tag tag-med">High Potential &middot; Requires Product Discipline</div>
+                        <div class="layer-title">Layer 2 &mdash; Products</div>
+                        <p>AI in your product is only as valuable as the problem it solves. The failure mode is feature theater &mdash; impressive capabilities stapled onto a product that didn't need them. Start with a specific user problem, a measurable outcome, and a cost model that accounts for inference at scale.</p>
+                    </div>
+                    <div class="layer-card">
+                        <div class="layer-tag tag-long">Real Value &middot; Longest Runway</div>
+                        <div class="layer-title">Layer 3 &mdash; Business Functions</div>
+                        <p>AI in operations, finance, HR, and customer success can generate significant efficiency gains, but the path is slower and organizational resistance is higher. Do not implement AI on top of a broken process and call it transformation.</p>
+                    </div>
+                </div>
+
+                <h2 class="post-h2">How to Start</h2>
+
+                <p>Enough diagnosis. Here is a concrete path forward for a CTO ready to stop experimenting and start building:</p>
+
+                <div class="step-grid">
+                    <div class="step-card">
+                        <div class="step-number">01</div>
+                        <div>
+                            <div class="step-title">Audit your current state honestly</div>
+                            <div class="step-body">Where has AI been deployed? What were the stated objectives? What are the actual, measured outcomes? If you can't answer that last question, you don't have an AI strategy &mdash; you have AI spending.</div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">02</div>
+                        <div>
+                            <div class="step-title">Make the SDLC your first win</div>
+                            <div class="step-body">Deploy AI-assisted development tools, instrument your pipeline, and measure before and after. Build the internal proof of concept that gives you credibility for the next board conversation.</div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">03</div>
+                        <div>
+                            <div class="step-title">Define what "good" looks like before you deploy</div>
+                            <div class="step-body">Every AI initiative needs a technical owner who can recognize bad output. This is non-negotiable. If no one on the initiative can evaluate quality, you will ship risk, not progress.</div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">04</div>
+                        <div>
+                            <div class="step-title">Build the cost model before you build the feature</div>
+                            <div class="step-body">Every AI capability has three cost lines: development, inference during development, and runtime at production scale. All three belong in your business case before a line of code is written.</div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">05</div>
+                        <div>
+                            <div class="step-title">Recalibrate your talent strategy</div>
+                            <div class="step-body">Stop using AI as a headcount reduction lever. Use it as a capability amplifier. The question isn't "how many people can AI replace?" &mdash; it's "what can my best technical people accomplish if I remove every mechanical constraint on their time?"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="post-h2">The Bottom Line</h2>
+
+                <p>The CTOs who will win the next five years are not the ones who deployed the most AI. They are the ones who deployed it with discipline &mdash; who tied every initiative to a business case, maintained engineering standards in an era of generative shortcuts, and understood the difference between AI as a productivity tool and AI as a strategy.</p>
+
+                <p>The democratization of AI is real. But judgment, architecture, and cost awareness are still scarce. <strong>That scarcity is your competitive advantage &mdash; if you choose to protect it.</strong></p>
+
+                <p>You are behind. But behind is still recoverable. The question is whether you're ready to be honest about where you are before you decide where you're going.</p>
+
+                <p class="article-bio">David Rizzo is a technology executive and CTO with direct experience deploying AI across product development, software engineering, and enterprise business functions. He advises PE-backed software companies and enterprise technology leaders through EEITREND. Connect at <a href="https://www.eeitrend.com">eeitrend.com</a> or on <a href="https://www.linkedin.com/in/davidrizzo1" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
+
+            </div>
+
+            <div class="article-footer">
+                <a href="blog.html" class="btn">&#8592; All posts</a>
+                <a href="index.html#contact" class="btn">Get in touch</a>
+            </div>
+
+        </div>
+    </article>
+
+    <!-- FOOTER -->
+    <footer>
+        <a href="index.html" class="footer-brand">EEITREND</a>
+        <span class="footer-copy">&copy; 2026 David Rizzo. All rights reserved.</span>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks  = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+    </script>
+</body>
+</html>
