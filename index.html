@@ -992,7 +992,7 @@
                 <!-- Contact form -->
                 <div class="contact-form-wrap">
                     <p class="contact-form-title">Send a Message</p>
-                    <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <form id="contact-form" action="mailto:david@eeitrend.com" method="POST" enctype="text/plain">
                         <div class="form-grid">
                             <div class="form-field">
                                 <label for="cf-name">Name</label>
@@ -1012,7 +1012,6 @@
                             </div>
                         </div>
                         <button type="submit" class="form-submit">Send Message &#8594;</button>
-                        <div class="form-success" id="form-success">Thanks — your message has been sent. I'll be in touch shortly.</div>
                     </form>
                 </div>
             </div>
@@ -1044,34 +1043,6 @@
 
         document.querySelectorAll('.reveal, .reveal-group').forEach(el => observer.observe(el));
 
-        // Contact form via Formspree
-        const contactForm = document.getElementById('contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                const btn = contactForm.querySelector('.form-submit');
-                btn.textContent = 'Sending…';
-                btn.disabled = true;
-                try {
-                    const res = await fetch(contactForm.action, {
-                        method: 'POST',
-                        body: new FormData(contactForm),
-                        headers: { 'Accept': 'application/json' }
-                    });
-                    if (res.ok) {
-                        contactForm.reset();
-                        document.getElementById('form-success').style.display = 'block';
-                        btn.textContent = 'Sent ✓';
-                    } else {
-                        btn.textContent = 'Error — try again';
-                        btn.disabled = false;
-                    }
-                } catch {
-                    btn.textContent = 'Error — try again';
-                    btn.disabled = false;
-                }
-            });
-        }
     </script>
 </body>
 </html>
