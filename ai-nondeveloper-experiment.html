@@ -203,8 +203,6 @@
         .article-body a { color: var(--gold); text-decoration: underline; text-decoration-color: var(--gold-dim); text-underline-offset: 3px; transition: color 0.2s; }
         .article-body a:hover { color: var(--gold-light); }
 
-        .article-bio { font-size: 0.92rem; line-height: 1.7; color: var(--text-body); font-style: italic; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
-
         /* POST FOOTER */
         .article-footer { margin-top: 3rem; padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
         .article-footer .btn { display: inline-block; padding: 0.7rem 1.4rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; color: var(--gold); border: 1px solid var(--border); transition: background 0.3s, border-color 0.3s; }
@@ -250,7 +248,7 @@
 
             <p class="article-eyebrow">Observed Case Study &middot; AI Strategy</p>
             <h1 class="article-title">They Gave AI Coding Tools to Non-Developers.<br>Here's What Broke.</h1>
-            <p class="article-subtitle">The promise was compelling: AI has lowered the barrier to building software so much that you don't need engineers anymore. A company tested that premise. This is what it actually cost them &mdash; and what every executive needs to understand before running the same experiment.</p>
+            <p class="article-subtitle">The promise was compelling: AI has lowered the barrier to building software so much that you don't need engineers anymore. A company tested that premis. This is what it actually cost them and what every executive needs to understand before running the same experiment.</p>
 
             <div class="article-meta">
                 <span>8 min read</span>
@@ -268,14 +266,14 @@
 
                 <p>Somewhere in the last two years, a seductive idea took hold in enterprise boardrooms: if AI can write code, you no longer need people who understand code. The productivity demos are dazzling. The vendor decks promise 10x output. And the cost math looks irresistible when you're staring at fully-loaded engineering salaries.</p>
 
-                <p>So the experiment got run. AI coding tools were placed directly in the hands of non-developers &mdash; business analysts, product managers, operations staff &mdash; and asked to build a real software product. Not a prototype. Not a hackathon toy. A production-bound system with actual business requirements and real compute costs attached to it.</p>
+                <p>So the experiment got run. AI coding tools were placed directly in the hands of non-developers. They business analysts, product managers and operations staff asked to build a real software product. Not a prototype. Not a hackathon toy. A production-bound system with actual business requirements and real compute costs attached to it.</p>
 
                 <p>The project was sunsetted after hundreds of hours of work and tens of thousands of dollars in compute spend.</p>
 
-                <p>Having observed this effort closely, the lessons are worth sharing &mdash; not to embarrass anyone involved, the effort was genuine and the people were talented &mdash; but because the same experiment is being quietly run inside dozens of enterprises right now, and most of them don't yet know what the bill will look like.</p>
+                <p>Having observed this effort closely, the lessons are worth sharing. This is not to embarrass anyone involved, the effort was genuine and the people were talented but because the same experiment is being quietly run inside dozens of enterprises right now, and most of them don't yet know what the bill will look like.</p>
 
                 <blockquote class="post-quote">
-                    <p>AI didn't lower the barrier to building software. It lowered the barrier to producing code. Those are not the same thing.</p>
+                    <p>"AI didn't lower the barrier to building software. It lowered the barrier to producing code. Those are not the same thing."</p>
                     <cite>&mdash; David Rizzo</cite>
                 </blockquote>
 
@@ -283,27 +281,27 @@
 
                 <p>The goal was straightforward on paper: deploy a modern AI coding assistant and give a cross-functional team the tools to build an internal workflow application without requiring dedicated engineering headcount. The team was bright, motivated, and had enough technical fluency to navigate the tools. Leadership was enthusiastic. The timeline was aggressive but not unreasonable.</p>
 
-                <p>What became clear over time is that building software is not a problem of <em>syntax</em> &mdash; it never was. AI has essentially solved syntax. What it hasn't solved is <em>judgment</em>. And without that judgment, the output of AI coding tools in the wrong hands looks like progress right up until it doesn't.</p>
+                <p>What became clear over time is that building software is not a problem of <em>syntax</em>, it never was. AI has essentially solved syntax. What it hasn't solved is <em>judgment</em>. And without that judgment, the output of AI coding tools in the wrong hands looks like progress right up until it doesn't.</p>
 
                 <h2 class="post-h2">The Three Failure Modes</h2>
 
-                <p>These weren't one-off bugs or implementation slip-ups. They were structural, repeatable, and &mdash; in hindsight &mdash; entirely predictable.</p>
+                <p>These weren't one-off bugs or implementation slip-ups. They were structural, repeatable, and, in hindsight, entirely predictable.</p>
 
                 <div class="failure-grid">
                     <div class="failure-card">
                         <div class="failure-label">Failure Mode 01</div>
                         <div class="failure-title">No Architectural Foundation</div>
-                        <p>The team started building immediately. That was the problem. Architecture isn't a phase in software development &mdash; it's the constraint system that makes every subsequent decision cheaper, faster, and reversible. Without a defined architecture and a coherent architectural strategy, AI becomes a tool for accelerating local decisions with no global awareness. Every prompt optimizes for the prompt. Nobody in the room had the expertise to establish the north star the AI was supposed to be building toward. The result: a collection of working pieces that didn't cohere into a working system.</p>
+                        <p>The team started building immediately. That was the problem. Architecture isn't a phase in software development — it's the constraint system that makes every subsequent decision cheaper, faster, and reversible. Without a defined architecture and a coherent architectural strategy, AI becomes a tool for accelerating local decisions with no global awareness. Every prompt optimizes for the prompt. Nobody in the room had the expertise to establish the north star the AI was supposed to be building toward. The result: a collection of working pieces that didn't cohere into a working system.</p>
                     </div>
                     <div class="failure-card">
                         <div class="failure-label">Failure Mode 02</div>
-                        <div class="failure-title">Inability to Recognize Bad Code &mdash; or Unneeded Code</div>
-                        <p>This is the failure mode nobody talks about, and it's the most insidious. The code ran. Tests passed. It looked like progress. But no one on the team had the experience to recognize redundant logic, inefficient queries, unnecessary API calls, or the absence of reusability across modules. Worse: they couldn't identify code that simply shouldn't exist &mdash; functions built to solve problems the architecture would have prevented. AI is a confident generator. It produces code whether that code is optimal, tolerable, or wasteful. Evaluating the output requires exactly the expertise you thought you were replacing. The technical debt accumulated silently with every sprint.</p>
+                        <div class="failure-title">Inability to Recognize Bad or Unneeded Code</div>
+                        <p>This is the failure mode nobody talks about, and it's the most insidious. The code ran. Tests passed. It looked like progress. But no one on the team had the experience to recognize redundant logic, inefficient queries, unnecessary API calls, or the absence of reusability across modules. Worse: they couldn't identify code that simply shouldn't exist. They were functions built to solve problems the architecture would have prevented. AI is a confident generator. It produces code whether that code is optimal, tolerable, or wasteful. Evaluating the output requires exactly the expertise you thought you were replacing. The technical debt accumulated silently with every sprint.</p>
                     </div>
                     <div class="failure-card">
                         <div class="failure-label">Failure Mode 03</div>
                         <div class="failure-title">No Model for Runtime Compute Cost</div>
-                        <p>This was the final reckoning. AI-assisted development made it easy to invoke models, trigger calls, and chain operations in ways that felt natural during development. What nobody modeled was what those patterns cost at runtime, at scale, with real usage volumes. The compute bill grew in ways that were invisible to the team &mdash; not out of negligence, but because runtime cost modeling is a deeply technical discipline. Understanding token throughput, API call patterns, memory consumption, and inference cost per operation requires the kind of systems-level thinking that doesn't come from business analysis or product management backgrounds. By the time leadership saw the numbers, the gap between build cost and operational viability had made the project untenable.</p>
+                        <p>This was the final reckoning. AI-assisted development made it easy to invoke models, trigger calls, and chain operations in ways that felt natural during development. What nobody modeled was what those patterns cost at runtime, at scale, with real usage volumes. The compute bill grew in ways that were invisible to the team. This was not out of negligence, but because runtime cost modeling is a deeply technical discipline. Understanding token throughput, API call patterns, memory consumption, and inference cost per operation requires the kind of systems-level thinking that doesn't come from business analysis or product management backgrounds. By the time leadership saw the numbers, the gap between build cost and operational viability had made the project untenable.</p>
                     </div>
                 </div>
 
@@ -322,14 +320,14 @@
 
                 <p>The conclusion isn't that AI coding tools are overhyped. They're extraordinary. Engineering teams using them well are accelerating delivery in ways that would have seemed implausible three years ago.</p>
 
-                <p>The conclusion is that AI changes the <em>shape</em> of an engineering team &mdash; not the need for engineering judgment.</p>
+                <p>The conclusion is that AI changes the <em>shape</em> of an engineering team not the need for engineering judgment.</p>
 
-                <p>A skilled engineer with AI tools is not 10% more productive. In the right context, they can be an order of magnitude more productive. They can own product thinking and engineering execution simultaneously in ways that previously required two or three people. That's the real leverage point &mdash; and it only exists when someone in the room can evaluate what the AI is producing.</p>
+                <p>A skilled engineer with AI tools is not 10% more productive. In the right context, they can be an order of magnitude more productive. They can own product thinking and engineering execution simultaneously in ways that previously required two or three people. That's the real leverage point and it only exists when someone in the room can evaluate what the AI is producing.</p>
 
                 <p>Remove that judgment layer, and what you get is expensive, confident mediocrity at scale.</p>
 
                 <blockquote class="post-quote">
-                    <p>You still need to hire and retain people who know what good looks like. AI changes the shape of your team &mdash; not the need for judgment.</p>
+                    <p>"You still need to hire and retain people who know what good looks like. AI changes the shape of your team not the need for judgment."</p>
                     <cite>&mdash; David Rizzo</cite>
                 </blockquote>
 
@@ -339,17 +337,16 @@
 
                 <p><strong>Who is defining the architecture?</strong> If the answer is "the AI will figure it out," stop the project before it starts. Architecture is a human discipline that requires organizational context, constraint awareness, and long-term systems thinking that no current AI tool provides autonomously.</p>
 
-                <p><strong>Who is reviewing the code for quality &mdash; not just correctness?</strong> Running tests confirm that code does what it claims to do. They don't confirm that the code is efficient, maintainable, non-redundant, or worth having at all. That evaluation requires a trained eye.</p>
+                <p><strong>Who is reviewing the code for quality — not just correctness?</strong> Running tests confirm that code does what it claims to do. They don't confirm that the code is efficient, maintainable, non-redundant, or worth having at all. That evaluation requires a trained eye.</p>
 
                 <p><strong>Who has modeled the runtime cost?</strong> Development cost and operational cost are two entirely different numbers. If your team can't produce a defensible compute cost model before you move toward production, you're flying blind on the economics of the thing you're building.</p>
 
                 <div class="conclusion-box">
                     <h2>The Bottom Line</h2>
-                    <p>The experiment wasn't a failure of people or effort. It was a failure of premise &mdash; a premise the AI vendor ecosystem has been happy to encourage because it makes for better marketing than the truth.</p>
+                    <p>The experiment wasn't a failure of people or effort. It was a failure of premise. A premise the AI vendor ecosystem has been happy to encourage because it makes for better marketing than the truth.</p>
                     <p>The truth is this: AI is the most powerful software development accelerant to emerge in nearly thirty years of enterprise software history. It's also a tool that amplifies whatever judgment is already in the room. Put it in the hands of people with deep technical judgment and you get extraordinary leverage. Remove that judgment layer and you get an expensive, confident mess.</p>
                     <p><strong>Save yourself the compute bill. Hire the judgment first.</strong></p>
                 </div>
-
 
             </div>
 
