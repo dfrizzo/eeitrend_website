@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI ROI Is a Portfolio Fiction. Start Measuring Features. | EEITREND</title>
+    <meta name="description" content="85% of enterprises increased AI investment last year. 95% of pilots delivered no measurable P&L impact. The discipline that's missing is feature-level unit economics — and the CTO should own it.">
+    <link rel="canonical" href="https://eeitrend.com/ai-roi-portfolio-fiction.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="AI ROI Is a Portfolio Fiction. Start Measuring Features.">
+    <meta property="og:description" content="85% of enterprises increased AI investment last year. 95% of pilots delivered no measurable P&L impact. The discipline that's missing is feature-level unit economics — and the CTO should own it.">
+    <meta property="og:url" content="https://eeitrend.com/ai-roi-portfolio-fiction.html">
+    <meta property="article:author" content="David Rizzo">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0B2A4A;
+            --bg-card: rgba(255,255,255,0.04);
+            --gold: #d4af37;
+            --gold-light: #f0c84a;
+            --gold-dim: #b8942e;
+            --gold-subtle: rgba(212,175,55,0.12);
+            --border: rgba(212,175,55,0.22);
+            --text-body: rgba(212,175,55,0.78);
+            --nav-h: 72px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--gold);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle at 15% 50%, rgba(212,175,55,0.07) 0%, transparent 50%),
+                radial-gradient(circle at 85% 20%, rgba(244,208,63,0.05) 0%, transparent 50%);
+            animation: bgShift 28s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes bgShift {
+            0%,100% { transform: translate(0,0) rotate(0deg); }
+            33%      { transform: translate(3%,5%) rotate(60deg); }
+            66%      { transform: translate(-3%,3%) rotate(120deg); }
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-h);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 3rem;
+            background: rgba(11,42,74,0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: var(--gold); text-decoration: none; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s, color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold-light); }
+        .nav-cta { padding: 0.45rem 1.2rem; border: 1px solid var(--border); opacity: 1 !important; }
+        .nav-cta:hover { background: var(--gold-subtle) !important; border-color: var(--gold) !important; }
+        .hamburger { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+
+        /* ARTICLE */
+        article { position: relative; z-index: 10; padding: calc(var(--nav-h) + 4rem) 2rem 2rem; }
+        .article-inner { max-width: 760px; margin: 0 auto; }
+
+        .article-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 1rem; }
+        .article-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; color: var(--gold); line-height: 1.15; margin-bottom: 0.75rem; }
+        .article-subtitle { font-size: 1.1rem; line-height: 1.6; color: var(--text-body); margin-bottom: 1.5rem; }
+        .article-meta { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; font-size: 0.85rem; color: var(--gold-dim); letter-spacing: 0.05em; margin-bottom: 1.5rem; }
+        .article-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2.5rem; }
+        .article-tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dim); padding: 0.2rem 0.6rem; border: 1px solid var(--border); border-radius: 2px; }
+
+        .gold-rule { width: 60px; height: 2px; background: var(--gold); margin: 2rem 0 2.25rem; }
+
+        /* BODY TEXT */
+        .article-body p { font-size: 1.02rem; line-height: 1.8; color: var(--text-body); margin-bottom: 1.4rem; }
+        .article-body p em { color: var(--gold); font-style: italic; }
+        .article-body p strong { color: var(--gold); font-weight: 600; }
+
+        .post-h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.7rem; font-weight: 600; color: var(--gold); line-height: 1.25; margin: 2.75rem 0 1rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+
+        /* PULL QUOTE */
+        .post-quote {
+            border-left: 2px solid var(--gold);
+            margin: 2.5rem 0;
+            padding: 0.75rem 0 0.75rem 1.5rem;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--gold);
+        }
+
+        /* STATS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin: 2.5rem 0;
+        }
+        .stat-card {
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+        }
+        .stat-number {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            line-height: 1.45;
+            color: var(--text-body);
+        }
+
+        /* FRAMEWORK TABLE */
+        .framework-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.92rem;
+        }
+        .framework-table th {
+            background: rgba(212,175,55,0.1);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+        }
+        .framework-table td {
+            border: 1px solid var(--border);
+            padding: 0.85rem 1rem;
+            vertical-align: top;
+            color: var(--text-body);
+            line-height: 1.6;
+        }
+        .framework-table td:first-child {
+            font-weight: 600;
+            color: var(--gold);
+            white-space: nowrap;
+        }
+        .framework-table tr:hover td { background: rgba(212,175,55,0.03); }
+
+        /* STEP CARDS */
+        .step-grid { display: flex; flex-direction: column; gap: 1.25rem; margin: 1.75rem 0; }
+        .step-card {
+            display: grid;
+            grid-template-columns: 3.5rem 1fr;
+            gap: 1.25rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            padding: 1.5rem;
+            align-items: start;
+        }
+        .step-number {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: rgba(212,175,55,0.2);
+            line-height: 1;
+        }
+        .step-title { font-size: 0.95rem; font-weight: 600; color: var(--gold); margin-bottom: 0.4rem; }
+        .step-body { font-size: 0.97rem; line-height: 1.75; color: var(--text-body); }
+
+        /* CALLOUT */
+        .callout {
+            border: 1px solid var(--border);
+            border-top: 2px solid var(--gold);
+            background: var(--bg-card);
+            padding: 1.5rem 1.75rem;
+            margin: 2rem 0;
+        }
+        .callout-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            margin-bottom: 0.75rem;
+        }
+        .callout p { margin: 0; font-size: 0.98rem; color: var(--text-body); }
+        .callout p strong { color: var(--gold); }
+
+        .article-body a { color: var(--gold); text-decoration: underline; text-decoration-color: var(--gold-dim); text-underline-offset: 3px; transition: color 0.2s; }
+        .article-body a:hover { color: var(--gold-light); }
+
+        /* POST FOOTER */
+        .article-footer { margin-top: 3rem; padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .article-footer .btn { display: inline-block; padding: 0.7rem 1.4rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; color: var(--gold); border: 1px solid var(--border); transition: background 0.3s, border-color 0.3s; }
+        .article-footer .btn:hover { background: var(--gold-subtle); border-color: var(--gold); }
+
+        /* FOOTER */
+        footer { position: relative; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 2rem 3rem; border-top: 1px solid var(--border); background: rgba(11,42,74,0.6); }
+        .footer-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .footer-copy { font-size: 0.8rem; color: var(--gold-dim); }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            nav { padding: 0 1.5rem; }
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: rgba(11,42,74,0.98); padding: 2rem 1.5rem; gap: 1.5rem; border-bottom: 1px solid var(--border); z-index: 199; }
+            article { padding: calc(var(--nav-h) + 2.5rem) 1.5rem 2rem; }
+            .article-title { font-size: 1.85rem; }
+            .post-h2 { font-size: 1.4rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .step-card { grid-template-columns: 1fr; }
+            .framework-table { font-size: 0.82rem; }
+            .framework-table th, .framework-table td { padding: 0.6rem 0.75rem; }
+            footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="nav-brand">EEITREND</a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li>
+            <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">&#9776;</button>
+    </nav>
+
+    <!-- ARTICLE -->
+    <article>
+        <div class="article-inner">
+
+            <p class="article-eyebrow">CTO &middot; AI Strategy &middot; FinOps</p>
+            <h1 class="article-title">AI ROI Is a Portfolio Fiction.<br>Start Measuring Features.</h1>
+            <p class="article-subtitle">Every quarter, the same scene plays out in boardrooms across the Fortune 500. The CEO asks about AI ROI. The CTO talks velocity. The CFO points at a cloud bill that doubled and can't isolate a single line item. The board tables the discussion and schedules the same conversation for next quarter.</p>
+
+            <div class="article-meta">
+                <span>10 min read</span>
+            </div>
+
+            <div class="article-tags">
+                <span class="article-tag">AI Strategy</span>
+                <span class="article-tag">CTO</span>
+                <span class="article-tag">FinOps</span>
+                <span class="article-tag">ROI</span>
+            </div>
+
+            <div class="gold-rule"></div>
+
+            <div class="article-body">
+
+                <p>This is not a technology failure. It is a measurement failure &mdash; and it is nearly universal.</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">of executives increased AI investment over the prior twelve months<br><small style="opacity:0.6;">Deloitte, 2025</small></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">73%</div>
+                        <div class="stat-label">reported AI costs exceeded original projections<br><small style="opacity:0.6;">FinOps Foundation, 2026</small></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">of pilot programs delivered no measurable P&amp;L impact<br><small style="opacity:0.6;">MIT GenAI Divide Study</small></div>
+                    </div>
+                </div>
+
+                <p>The industry has accepted a convenient fiction: that AI ROI can be understood at the portfolio level &mdash; a blend of productivity estimates, adoption metrics, and cost-per-seat calculations that produces an impressive-looking slide for the board deck. It cannot. Portfolio-level ROI measurement is how organizations convince themselves they are winning when they have no idea which bets are paying off and which are quietly burning cash.</p>
+
+                <p>The discipline that is missing is feature-level unit economics. And the executive who should own it is the CTO.</p>
+
+                <h2 class="post-h2">What Is Actually Being Measured &mdash; And Why It Falls Short</h2>
+
+                <p>The current state of AI measurement exists on a spectrum from vague to misleading.</p>
+
+                <p>At the broadest level, organizations track aggregate AI spend against qualitative outcomes: "our developers are more productive," "customer satisfaction improved," "time-to-market accelerated." These statements may be true. They are not measurement. They are sentiment.</p>
+
+                <p>One level more specific, FinOps teams track cloud and token spend &mdash; a genuine improvement. But cloud cost dashboards show that AI spending increased; they cannot tell you which product feature caused the increase, whether that feature was worth it, or whether the team that built it understood the economics before they shipped.</p>
+
+                <p>The most sophisticated organizations have moved to productivity proxies: developers save X hours per week, support agents resolve tickets Y% faster. These metrics are useful. They are also systematically incomplete. They count the value of AI-assisted output without counting the downstream cost of checking, correcting, or reworking that output. When a developer uses an AI coding tool to generate a component in two hours instead of eight, the productivity gain is only real if the component doesn't require three days of architectural remediation three months later.</p>
+
+                <blockquote class="post-quote">The question being asked is "What does AI cost us?" The question that should be asked is "What did this specific AI-powered feature cost to build and operate, and what did it actually return?"</blockquote>
+
+                <h2 class="post-h2">The Anatomy of What a Feature Actually Costs</h2>
+
+                <p>To measure feature-level ROI, organizations first need an honest accounting of what a feature costs. This is harder than it sounds and significantly more expensive than most project estimates suggest.</p>
+
+                <p><strong>Build Cost</strong> is the starting point most teams get reasonably right: engineering hours, model selection, prompt engineering, evaluation cycles, and integration testing. What gets underestimated is the iteration cost &mdash; the number of cycles required to get AI output to production-grade reliability. Unlike traditional software, AI features rarely work well on the first build. The prompt engineering, retrieval tuning, and evaluation infrastructure required to move from "impressive demo" to "production-ready" is substantial.</p>
+
+                <p><strong>Inference Cost</strong> is where the math gets dangerous. Token consumption at scale is non-linear and deeply sensitive to feature design. A system prompt that runs 2,000 tokens fires on every single user interaction. A retrieval-augmented generation pipeline that pulls three documents per query at 1,500 tokens each adds 4,500 tokens to every call. Multiply that by daily active users, and what looked like a manageable cost in the pilot environment becomes a significantly different number in production.</p>
+
+                <div class="callout">
+                    <div class="callout-label">The Consumption Trap</div>
+                    <p>A pilot customer-service chatbot costing $5,000 per month can become $50,000 or more once deployed across the enterprise &mdash; with no change in vendor pricing. The only variable is usage. This is what analysts call the consumption trap, and it catches most organizations off guard.</p>
+                </div>
+
+                <p><strong>Hidden Operational Costs</strong> extend beyond token spend. They include retry logic, tool call overhead in agentic workflows, context window bloat as conversation history accumulates, and the human review loops organizations install to catch AI errors before they reach customers. That last cost is particularly underreported. If an AI feature requires a human to review 20% of outputs to maintain quality standards, the labor cost of that review belongs in the feature's cost model.</p>
+
+                <p><strong>The AI Tax on Existing Features</strong> deserves its own category. When AI capabilities are embedded into existing workflows &mdash; an AI triage layer added to a ticketing system, a generative summary baked into a SIEM alert &mdash; the cost is layered on top of existing infrastructure with no separate cost identity. The result is that AI spending becomes structurally invisible, pooled into shared infrastructure that serves multiple teams and products. Without deliberate attribution, it shows up as undifferentiated compute on the cloud invoice.</p>
+
+                <p><strong>Maintenance and Drift</strong> close out the true cost picture. Models are updated by providers. Prompts that performed well in one model version degrade in the next. Retrieval pipelines require ongoing tuning as data volumes and schemas evolve. The organizations that account for these costs honestly in their feature economics models are a small minority.</p>
+
+                <h2 class="post-h2">The ROI Side Is Equally Murky</h2>
+
+                <p>If the cost side of the feature P&amp;L is underestimated, the return side is overestimated &mdash; and often significantly.</p>
+
+                <p>The most common measurement failure is what might be called the <em>phantom productivity problem</em>. Organizations measure AI adoption and draft speed as proxies for productivity gain, without accounting for the downstream cost of validating, correcting, or reversing AI-assisted decisions. The metric shows that developers are writing code faster. It does not show whether that code required more architectural review, introduced more regressions, or created technical debt that consumed engineering capacity months later.</p>
+
+                <p>This is not a theoretical concern. An experiment placing AI coding tools directly in the hands of non-developers resulted in exactly this outcome &mdash; impressive initial velocity metrics, followed by architectural inconsistency, cost overruns from poorly structured AI calls, and a remediation effort that consumed more engineering time than the original work would have required. <a href="ai-nondeveloper-experiment.html">Read the full account here.</a></p>
+
+                <p>There is also a structural timeline problem. Traditional enterprise technology follows a predictable 7&ndash;12 month payback cycle. Most organizations achieve satisfactory AI returns within 2&ndash;4 years &mdash; three to four times longer than conventional technology deployments, but budgeted on conventional timelines. This mismatch creates a situation where AI investments are evaluated against benchmarks they were never designed to meet, declared failures prematurely, or declared successes before enough time has passed to know.</p>
+
+                <h2 class="post-h2">Why the Accountability Gap Persists</h2>
+
+                <p>Understanding why this gap exists requires examining the incentive structure around AI deployment &mdash; and it does not reflect well on how technology organizations are currently structured.</p>
+
+                <p>Product owns the roadmap and is incentivized to ship AI features. Engineering builds and ships them, measured on velocity and delivery. FinOps owns the cloud bill but lacks the product context to attribute costs to features meaningfully. Finance measures overall AI spend as a budget category. Nobody sits at the intersection with ownership of a feature's complete economic profile from build through production.</p>
+
+                <p>The CTO occupies the natural position to own this &mdash; with visibility across engineering cost, infrastructure spend, and product delivery. However, CTOs are rarely incentivized to slow feature deployment in service of measurement rigor. In PE-backed environments particularly, the pressure to demonstrate AI progress to the board creates a strong bias toward shipping over accounting. The cost of not measuring is diffuse and deferred. The cost of not shipping is immediate and visible.</p>
+
+                <p>Vendor pricing complexity compounds the problem. The shift from per-seat licensing to consumption-based and hybrid models has made AI cost forecasting genuinely difficult. A budget built on per-seat assumptions applied to a consumption model is a budget built on sand.</p>
+
+                <h2 class="post-h2">What Leading Organizations Are Starting to Do</h2>
+
+                <p>A small percentage of organizations have moved beyond the portfolio fiction and begun treating AI like a business unit &mdash; with a chart of accounts that tracks revenue attributable, costs allocated, and margin calculated at the workload level.</p>
+
+                <p>The architectural shift that enables this is <strong>request-level attribution</strong>: tagging every LLM call at the point of execution with metadata identifying the feature, the team, the user segment, and the deployment stage. This is not a complex engineering problem. It is a discipline problem. Organizations that build attribution into their AI infrastructure from day one have the data to answer the boardroom question.</p>
+
+                <p><strong>Model routing</strong> is the second lever. Not every AI task requires frontier-model capability. Large frontier models cost 17&ndash;25 times more per token than capable smaller models. Organizations that route by task complexity rather than defaulting to the most powerful model available are finding meaningful cost reductions without sacrificing output quality.</p>
+
+                <p><strong>Pre-deployment cost modeling</strong> &mdash; estimating token volume and call patterns before a feature ships rather than discovering costs on the next cloud invoice &mdash; is the third distinguishing practice. This requires product, engineering, and finance to collaborate at the design stage in a way that most organizations have not built into their development process.</p>
+
+                <h2 class="post-h2">A Framework: The AI Feature P&amp;L</h2>
+
+                <p>The organizations that will win the next phase of enterprise AI are not the ones deploying the most features. They are the ones that know which features are worth deploying. The mechanism is a feature-level P&amp;L &mdash; applied before a feature ships and reviewed quarterly once it is in production.</p>
+
+                <div style="overflow-x:auto; margin: 2rem 0;">
+                    <table class="framework-table">
+                        <thead>
+                            <tr>
+                                <th>Dimension</th>
+                                <th>What to Measure</th>
+                                <th>Where It Lives</th>
+                                <th>Who Owns It</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Build Cost</td>
+                                <td>Engineering hours + model eval cycles + prompt engineering + integration testing</td>
+                                <td>Engineering</td>
+                                <td>CTO / VP Engineering</td>
+                            </tr>
+                            <tr>
+                                <td>Run Cost</td>
+                                <td>Tokens &times; call volume + ops overhead + human review labor + maintenance</td>
+                                <td>FinOps / Cloud</td>
+                                <td>CTO + Finance</td>
+                            </tr>
+                            <tr>
+                                <td>Hard Return</td>
+                                <td>Time saved &times; fully-loaded cost, error reduction, revenue attribution, deflection rate</td>
+                                <td>Finance + Product</td>
+                                <td>CFO</td>
+                            </tr>
+                            <tr>
+                                <td>Soft Return</td>
+                                <td>CSAT delta, adoption rate, decision quality, time-to-market acceleration</td>
+                                <td>Product</td>
+                                <td>CPO</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>The governing principle is straightforward: if this table cannot be completed before a feature ships, the feature is not ready to ship. The build cost column should be known. The run cost should be modeled from expected call volume. The return should be defined in terms that finance can validate &mdash; not productivity proxies that engineering self-reports.</p>
+
+                <p>For features already in production without this discipline applied, the retrofit process starts with instrumentation: adding attribution tags to existing LLM calls, pulling cost data for the trailing 90 days, and mapping that cost against the business outcome metrics the feature was built to move. Most organizations will find surprises in both directions &mdash; features that looked expensive but are returning strong value, and features that looked cheap but are consuming resources against negligible return.</p>
+
+                <h2 class="post-h2">The Call to Action for Technology Executives</h2>
+
+                <p>This is a leadership discipline problem before it is a tooling problem. The tools to instrument AI costs, attribute them to features, and model unit economics exist and are maturing rapidly. What is missing is the organizational will to use them &mdash; and a CTO willing to make feature-level economic accountability a first-class concern.</p>
+
+                <div class="step-grid">
+                    <div class="step-card">
+                        <div class="step-number">01</div>
+                        <div>
+                            <div class="step-title">Audit your top five AI features in production</div>
+                            <div class="step-body">Build the cost side from cloud invoices and engineering records. Build the return side from product analytics and finance data. Treat the gaps in that exercise as the roadmap for instrumentation investment.</div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">02</div>
+                        <div>
+                            <div class="step-title">Establish a pre-deployment economic gate</div>
+                            <div class="step-body">Before a feature enters the build phase, require a model of expected token volume, call patterns, and projected run cost alongside the standard product requirements. It doesn't need to be precise &mdash; but it needs to exist.</div>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">03</div>
+                        <div>
+                            <div class="step-title">Build a quarterly AI feature P&amp;L review into your operating cadence</div>
+                            <div class="step-body">Run it with the same rigor applied to a business unit review: costs presented by feature, returns validated by finance, decisions made about which features to scale, optimize, or retire.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p>The companies that establish this discipline now will have a compounding advantage: the data to make better deployment decisions, the credibility to answer the board's ROI question with specificity, and the economic model to deploy AI at scale without the consumption surprises that are derailing many enterprise programs today.</p>
+
+                <blockquote class="post-quote">AI ROI is not a portfolio metric. It never was. The executives who internalize that earliest will define the next phase of enterprise AI &mdash; not by deploying the most, but by understanding what they have deployed.</blockquote>
+
+            </div>
+
+            <div class="article-footer">
+                <a href="blog.html" class="btn">&#8592; All posts</a>
+                <a href="index.html#contact" class="btn">Get in touch</a>
+            </div>
+
+        </div>
+    </article>
+
+    <!-- FOOTER -->
+    <footer>
+        <a href="index.html" class="footer-brand">EEITREND</a>
+        <span class="footer-copy">&copy; 2026 David Rizzo. All rights reserved.</span>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks  = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+    </script>
+</body>
+</html>
