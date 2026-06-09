@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Connection – St. Michael the Archangel Catholic School</title>
+    <meta name="description" content="Stay connected with the St. Michael alumni community. Update your contact information, join the alumni database, and receive news about upcoming events.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue:       #0055a4;
+            --blue-dark:  #003f7d;
+            --blue-light: #1a6bbf;
+            --gold:       #ffd200;
+            --gold-dark:  #e6bd00;
+            --white:      #ffffff;
+            --gray-100:   #f5f7fa;
+            --gray-200:   #e8ecf1;
+            --gray-400:   #9aa5b4;
+            --gray-600:   #4a5568;
+            --gray-800:   #1a202c;
+            --red:        #c53030;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--gray-800);
+            background: var(--gray-100);
+            line-height: 1.6;
+        }
+
+        /* ── HEADER ── */
+        .site-header {
+            background: var(--blue);
+            color: var(--white);
+            padding: 0;
+        }
+
+        .header-top {
+            background: var(--blue-dark);
+            padding: 6px 24px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            font-size: 13px;
+        }
+
+        .header-top a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .header-top a:hover { color: var(--gold); }
+
+        .header-main {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 16px 32px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .header-logo img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        .header-name {
+            flex: 1;
+        }
+
+        .header-name .line-1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--white);
+        }
+
+        .header-name .line-2 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 13px;
+            color: rgba(255,255,255,0.75);
+            margin-top: 2px;
+        }
+
+        .header-name .line-3 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 12px;
+            color: var(--gold);
+            font-style: italic;
+            margin-top: 1px;
+        }
+
+        /* ── NAV ── */
+        .site-nav {
+            background: var(--gold);
+            padding: 0 32px;
+        }
+
+        .site-nav ul {
+            list-style: none;
+            display: flex;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .site-nav li a {
+            display: block;
+            padding: 12px 18px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--blue-dark);
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            transition: background .2s, color .2s;
+        }
+
+        .site-nav li a:hover,
+        .site-nav li a.active {
+            background: var(--blue);
+            color: var(--white);
+        }
+
+        /* ── BREADCRUMB ── */
+        .breadcrumb {
+            background: var(--gray-200);
+            border-bottom: 1px solid #d1d9e0;
+            padding: 10px 32px;
+            font-size: 13px;
+            color: var(--gray-600);
+        }
+
+        .breadcrumb a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        .breadcrumb span { margin: 0 6px; }
+
+        /* ── HERO BANNER ── */
+        .hero {
+            background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, var(--blue-light) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 56px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+            pointer-events: none;
+        }
+
+        .hero-inner { position: relative; max-width: 700px; margin: 0 auto; }
+
+        .hero-eyebrow {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--blue-dark);
+            font-family: 'Oswald', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 4px 14px;
+            border-radius: 2px;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.85);
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        /* ── PAGE LAYOUT ── */
+        .page-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 32px 64px;
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 40px;
+        }
+
+        @media (max-width: 820px) {
+            .page-container { grid-template-columns: 1fr; }
+            .sidebar { order: -1; }
+        }
+
+        /* ── SECTION HEADINGS ── */
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--blue);
+            border-bottom: 3px solid var(--gold);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* ── FORM CARD ── */
+        .form-card {
+            background: var(--white);
+            border-radius: 6px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 36px 40px;
+            border-top: 4px solid var(--blue);
+        }
+
+        .form-intro {
+            font-size: 15px;
+            color: var(--gray-600);
+            margin-bottom: 28px;
+            line-height: 1.65;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 540px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-700, #374151);
+            margin-bottom: 5px;
+            letter-spacing: 0.2px;
+        }
+
+        label .req {
+            color: var(--red);
+            margin-left: 3px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid var(--gray-200);
+            border-radius: 4px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            color: var(--gray-800);
+            background: var(--white);
+            transition: border-color .2s, box-shadow .2s;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(0,85,164,0.12);
+        }
+
+        input::placeholder,
+        textarea::placeholder { color: var(--gray-400); }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a5568' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+            cursor: pointer;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: var(--gray-400);
+            margin-top: 4px;
+        }
+
+        /* Radio group */
+        .radio-group {
+            display: flex;
+            gap: 24px;
+            margin-top: 4px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--gray-800);
+            cursor: pointer;
+        }
+
+        .radio-label input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--blue);
+            cursor: pointer;
+        }
+
+        /* ── FIELDSET ── */
+        fieldset {
+            border: 1.5px solid var(--gray-200);
+            border-radius: 4px;
+            padding: 20px 20px 8px;
+            margin-bottom: 20px;
+        }
+
+        legend {
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--blue);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 0 8px;
+        }
+
+        /* ── SUBMIT BUTTON ── */
+        .btn-primary {
+            display: inline-block;
+            background: var(--blue);
+            color: var(--white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 14px 36px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background .2s, transform .1s;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--blue-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active { transform: translateY(0); }
+
+        .form-note {
+            font-size: 12px;
+            color: var(--gray-400);
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        /* ── SUCCESS MESSAGE ── */
+        .success-msg {
+            display: none;
+            background: #f0fff4;
+            border: 1.5px solid #68d391;
+            border-radius: 4px;
+            padding: 20px 24px;
+            margin-top: 24px;
+            color: #276749;
+            font-size: 15px;
+        }
+
+        .success-msg strong { display: block; font-size: 17px; margin-bottom: 6px; }
+
+        /* ── SIDEBAR ── */
+        .sidebar-card {
+            background: var(--white);
+            border-radius: 6px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .sidebar-card-header {
+            background: var(--blue);
+            color: var(--white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 14px 20px;
+            letter-spacing: 0.3px;
+        }
+
+        .sidebar-card-body {
+            padding: 20px;
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.65;
+        }
+
+        .sidebar-card-body a {
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .sidebar-card-body a:hover { text-decoration: underline; }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .contact-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .contact-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--white);
+        }
+
+        .contact-text strong { display: block; color: var(--gray-800); font-size: 13px; }
+        .contact-text span { font-size: 13px; color: var(--gray-600); }
+
+        .gold-rule {
+            border: none;
+            border-top: 3px solid var(--gold);
+            margin: 16px 0;
+        }
+
+        .quick-info li {
+            list-style: none;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--gray-200);
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .quick-info li:last-child { border-bottom: none; }
+
+        .quick-info .label { color: var(--gray-600); }
+        .quick-info .value { font-weight: 600; color: var(--blue); }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: var(--gray-100);
+            border-radius: 4px;
+            color: var(--blue) !important;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none !important;
+            transition: background .2s;
+        }
+
+        .social-link:hover { background: var(--gray-200) !important; }
+
+        /* ── FOOTER ── */
+        .site-footer {
+            background: var(--blue-dark);
+            color: rgba(255,255,255,0.75);
+            text-align: center;
+            padding: 28px 24px;
+            font-size: 13px;
+        }
+
+        .site-footer strong { color: var(--white); }
+
+        .site-footer a { color: var(--gold); text-decoration: none; }
+
+        /* ── VALIDATION ── */
+        .field-error {
+            font-size: 12px;
+            color: var(--red);
+            margin-top: 4px;
+            display: none;
+        }
+
+        input.invalid,
+        select.invalid,
+        textarea.invalid {
+            border-color: var(--red);
+        }
+
+        input.invalid:focus,
+        select.invalid:focus,
+        textarea.invalid:focus {
+            box-shadow: 0 0 0 3px rgba(197,48,48,0.12);
+        }
+
+        /* ════════════════════════════════════════
+           FULL-WIDTH BAND SECTIONS
+        ════════════════════════════════════════ */
+        .fw-section {
+            padding: 64px 32px;
+        }
+
+        .fw-section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .fw-section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .fw-eyebrow {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--blue-dark);
+            font-family: 'Oswald', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 4px 14px;
+            border-radius: 2px;
+            margin-bottom: 14px;
+        }
+
+        .fw-section-header h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--blue);
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+
+        .fw-section-header p {
+            font-size: 16px;
+            color: var(--gray-600);
+            max-width: 620px;
+            margin: 0 auto;
+            line-height: 1.65;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        @media (max-width: 900px) {
+            .cards-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── ENGAGE SECTION ── */
+        .engage-section {
+            background: var(--white);
+            border-top: 5px solid var(--gold);
+        }
+
+        .engage-card {
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+            border: 1.5px solid var(--gray-200);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow .25s, transform .25s;
+        }
+
+        .engage-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--blue);
+            transform: scaleX(0);
+            transition: transform .25s;
+        }
+
+        .engage-card:hover {
+            box-shadow: 0 8px 28px rgba(0,85,164,0.13);
+            transform: translateY(-3px);
+        }
+
+        .engage-card:hover::after { transform: scaleX(1); }
+
+        .engage-icon {
+            width: 58px;
+            height: 58px;
+            background: var(--blue);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+
+        .engage-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--white);
+        }
+
+        .engage-tag {
+            display: inline-block;
+            background: rgba(0,85,164,0.08);
+            color: var(--blue);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            align-self: flex-start;
+        }
+
+        .engage-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 21px;
+            font-weight: 600;
+            color: var(--blue-dark);
+            margin-bottom: 10px;
+            line-height: 1.25;
+        }
+
+        .engage-card p {
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.7;
+            flex: 1;
+            margin-bottom: 24px;
+        }
+
+        .btn-engage {
+            display: block;
+            width: 100%;
+            padding: 11px 20px;
+            border: 2px solid var(--blue);
+            border-radius: 4px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--blue);
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            text-align: center;
+            cursor: pointer;
+            background: transparent;
+            transition: background .2s, color .2s;
+        }
+
+        .btn-engage:hover {
+            background: var(--blue);
+            color: var(--white);
+        }
+
+        /* ── GIVE SECTION ── */
+        .give-section {
+            background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 70%, var(--blue-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .give-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+            pointer-events: none;
+        }
+
+        .give-section .fw-section-inner { position: relative; }
+        .give-section .fw-section-header h2 { color: var(--white); }
+        .give-section .fw-section-header p  { color: rgba(255,255,255,0.82); }
+
+        .give-card {
+            background: rgba(255,255,255,0.09);
+            border: 1.5px solid rgba(255,255,255,0.18);
+            border-radius: 8px;
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+            transition: background .25s, transform .25s;
+        }
+
+        .give-card:hover {
+            background: rgba(255,255,255,0.16);
+            transform: translateY(-3px);
+        }
+
+        .give-icon {
+            width: 58px;
+            height: 58px;
+            background: var(--gold);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+
+        .give-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--blue-dark);
+        }
+
+        .give-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 21px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 10px;
+            line-height: 1.25;
+        }
+
+        .give-card p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.7;
+            flex: 1;
+            margin-bottom: 20px;
+        }
+
+        .donation-amounts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .amt-btn {
+            padding: 6px 16px;
+            border: 1.5px solid rgba(255,210,0,0.6);
+            border-radius: 20px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gold);
+            background: transparent;
+            cursor: pointer;
+            transition: background .2s, color .2s, border-color .2s;
+        }
+
+        .amt-btn:hover,
+        .amt-btn.selected {
+            background: var(--gold);
+            color: var(--blue-dark);
+            border-color: var(--gold);
+        }
+
+        .btn-give {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            background: var(--gold);
+            color: var(--blue-dark);
+            font-family: 'Oswald', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background .2s, transform .1s;
+        }
+
+        .btn-give:hover {
+            background: var(--gold-dark);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── TOP UTILITY BAR ── -->
+    <div class="header-top">
+        <a href="#">FACTS Portal</a>
+        <a href="#">Directions</a>
+        <a href="#">Contact</a>
+        <a href="#">Schedule a Tour</a>
+    </div>
+
+    <!-- ── SITE HEADER ── -->
+    <header class="site-header">
+        <div class="header-main">
+            <div class="header-logo">
+                <a href="https://school.livoniastmichael.org">
+                    <img src="https://school.livoniastmichael.org/pics/STMCCS-STMTS_LOGO.gif"
+                         alt="St. Michael the Archangel Catholic School Logo">
+                </a>
+            </div>
+            <div class="header-name">
+                <div class="line-1">St. Michael the Archangel</div>
+                <div class="line-2">Catholic School &bull; Livonia, Michigan</div>
+                <div class="line-3">Building A Foundation for the Future</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ── NAVIGATION ── -->
+    <nav class="site-nav" aria-label="Main navigation">
+        <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Admissions</a></li>
+            <li><a href="#">Academics</a></li>
+            <li><a href="#">Student Life</a></li>
+            <li><a href="#">Athletics</a></li>
+            <li><a href="#" class="active">Alumni</a></li>
+            <li><a href="#">Support</a></li>
+            <li><a href="#">Church</a></li>
+        </ul>
+    </nav>
+
+    <!-- ── BREADCRUMB ── -->
+    <div class="breadcrumb">
+        <a href="#">Home</a>
+        <span>›</span>
+        <a href="#">Alumni</a>
+        <span>›</span>
+        Alumni Connection
+    </div>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-eyebrow">St. Michael Alumni</div>
+            <h1>Stay Connected<br>with Your Community</h1>
+            <p>Register in our alumni database to receive updates on reunions, events, and ways to give back to the school that shaped your future.</p>
+        </div>
+    </section>
+
+    <!-- ── PAGE BODY ── -->
+    <main>
+        <div class="page-container">
+
+            <!-- ── MAIN COLUMN: FORM ── -->
+            <div class="main-column">
+                <div class="form-card">
+                    <h2 class="section-title">Alumni Contact Information</h2>
+
+                    <p class="form-intro">
+                        The mission of the <strong>St. Michael Alumni Connection</strong> is to reunite and
+                        maintain connections among people from St. Michael parish and school. Fill out the form
+                        below so we can keep you informed about upcoming events such as reunions, the
+                        Baccalaureate Mass, and more. Fields marked <span style="color:var(--red)">*</span> are required.
+                    </p>
+
+                    <form id="alumniForm" novalidate>
+
+                        <!-- Personal Information -->
+                        <fieldset>
+                            <legend>Personal Information</legend>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name <span class="req">*</span></label>
+                                    <input type="text" id="firstName" name="firstName"
+                                           placeholder="e.g. Mary" required autocomplete="given-name">
+                                    <div class="field-error" id="err-firstName">Please enter your first name.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name <span class="req">*</span></label>
+                                    <input type="text" id="lastName" name="lastName"
+                                           placeholder="e.g. Sullivan" required autocomplete="family-name">
+                                    <div class="field-error" id="err-lastName">Please enter your last name.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="maidenName">Maiden Name <span style="font-weight:400;color:var(--gray-400)">(if applicable)</span></label>
+                                <input type="text" id="maidenName" name="maidenName"
+                                       placeholder="Optional" autocomplete="off">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="gradYear">Graduating Class Year <span class="req">*</span></label>
+                                    <input type="number" id="gradYear" name="gradYear"
+                                           placeholder="e.g. 1998" min="1940" max="2030" required>
+                                    <div class="field-error" id="err-gradYear">Please enter your graduation year.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="involvement">Years / Capacity Involved</label>
+                                    <input type="text" id="involvement" name="involvement"
+                                           placeholder="e.g. CYO, Scouts, Religious Ed">
+                                    <p class="hint">If you didn't graduate, list years &amp; role (CYO, Religious Ed, Scouts, etc.)</p>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- Professional Information -->
+                        <fieldset>
+                            <legend>Professional Information</legend>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="jobTitle">Current Job Title <span class="req">*</span></label>
+                                    <input type="text" id="jobTitle" name="jobTitle"
+                                           placeholder="e.g. Teacher" required>
+                                    <div class="field-error" id="err-jobTitle">Please enter your job title.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="employer">Current Employer <span class="req">*</span></label>
+                                    <input type="text" id="employer" name="employer"
+                                           placeholder="e.g. Livonia Public Schools" required>
+                                    <div class="field-error" id="err-employer">Please enter your employer.</div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- Contact Information -->
+                        <fieldset>
+                            <legend>Contact Information</legend>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email Address <span class="req">*</span></label>
+                                    <input type="email" id="email" name="email"
+                                           placeholder="you@example.com" required autocomplete="email">
+                                    <div class="field-error" id="err-email">Please enter a valid email address.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone"
+                                           placeholder="(734) 555-1234" autocomplete="tel">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">Street Address</label>
+                                <input type="text" id="address" name="address"
+                                       placeholder="123 Main St" autocomplete="street-address">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" id="city" name="city"
+                                           placeholder="Livonia" autocomplete="address-level2">
+                                </div>
+                                <div class="form-group">
+                                    <label for="state">State <span class="req">*</span></label>
+                                    <select id="state" name="state" required autocomplete="address-level1">
+                                        <option value="">— Select State —</option>
+                                        <option>AL</option><option>AK</option><option>AZ</option>
+                                        <option>AR</option><option>CA</option><option>CO</option>
+                                        <option>CT</option><option>DE</option><option>FL</option>
+                                        <option>GA</option><option>HI</option><option>ID</option>
+                                        <option>IL</option><option>IN</option><option>IA</option>
+                                        <option>KS</option><option>KY</option><option>LA</option>
+                                        <option>ME</option><option>MD</option><option>MA</option>
+                                        <option selected>MI</option><option>MN</option><option>MS</option>
+                                        <option>MO</option><option>MT</option><option>NE</option>
+                                        <option>NV</option><option>NH</option><option>NJ</option>
+                                        <option>NM</option><option>NY</option><option>NC</option>
+                                        <option>ND</option><option>OH</option><option>OK</option>
+                                        <option>OR</option><option>PA</option><option>RI</option>
+                                        <option>SC</option><option>SD</option><option>TN</option>
+                                        <option>TX</option><option>UT</option><option>VT</option>
+                                        <option>VA</option><option>WA</option><option>WV</option>
+                                        <option>WI</option><option>WY</option>
+                                        <option>DC</option><option>PR</option><option>VI</option>
+                                    </select>
+                                    <div class="field-error" id="err-state">Please select your state.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="max-width: 200px">
+                                <label for="zip">Zip / Postal Code</label>
+                                <input type="text" id="zip" name="zip"
+                                       placeholder="48150" maxlength="10" autocomplete="postal-code">
+                            </div>
+                        </fieldset>
+
+                        <!-- Permissions & Memories -->
+                        <fieldset>
+                            <legend>Permissions &amp; Memories</legend>
+
+                            <div class="form-group">
+                                <label>
+                                    May we share your contact information with the reunion coordinator?
+                                    <span class="req">*</span>
+                                </label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="shareConsent" value="yes" required>
+                                        Yes, I give permission
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="shareConsent" value="no">
+                                        No, keep private
+                                    </label>
+                                </div>
+                                <div class="field-error" id="err-shareConsent">Please select an option.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="memories">Share a Memory or Note <span style="font-weight:400;color:var(--gray-400)">(optional)</span></label>
+                                <textarea id="memories" name="memories" rows="4"
+                                          placeholder="Tell us about your favorite St. Michael memory, a teacher who influenced you, or anything you'd like to share…"></textarea>
+                            </div>
+                        </fieldset>
+
+                        <button type="submit" class="btn-primary">Submit My Information</button>
+                        <p class="form-note">Your information is kept secure and used only for St. Michael alumni communications.</p>
+
+                    </form>
+
+                    <div class="success-msg" id="successMsg">
+                        <strong>Thank you for registering!</strong>
+                        We've received your information and will be in touch about upcoming alumni events. Go Knights!
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ── SIDEBAR ── -->
+            <aside class="sidebar">
+
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header">Contact Us</div>
+                    <div class="sidebar-card-body">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <strong>Address</strong>
+                                <span>11311 Hubbard<br>Livonia, MI 48150</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <strong>Phone</strong>
+                                <span>(734) 261-1455 x225</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <strong>Email</strong>
+                                <span><a href="mailto:alumni@livoniastmichael.org">alumni@livoniastmichael.org</a></span>
+                            </div>
+                        </div>
+
+                        <hr class="gold-rule">
+
+                        <p style="margin-bottom:10px">Follow the <strong>SMAC Facebook page</strong> for event updates, including Baccalaureate Mass details each May.</p>
+                        <div class="social-links">
+                            <a class="social-link" href="https://www.facebook.com/livoniastmichaelSMAC" target="_blank" rel="noopener">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                                Facebook
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header">About SMAC</div>
+                    <div class="sidebar-card-body">
+                        <p>The <strong>St. Michael Alumni Connection (SMAC)</strong> fosters community for all those whose lives have been touched by St. Michael — promoting Catholic education through fellowship and participation in events.</p>
+                        <hr class="gold-rule">
+                        <ul class="quick-info">
+                            <li>
+                                <span class="label">All-Class Reunions</span>
+                                <span class="value">Ages 21+</span>
+                            </li>
+                            <li>
+                                <span class="label">Baccalaureate Mass</span>
+                                <span class="value">Each June</span>
+                            </li>
+                            <li>
+                                <span class="label">School Founded</span>
+                                <span class="value">80+ Years</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header">Planning a Reunion?</div>
+                    <div class="sidebar-card-body">
+                        <p>If you're organizing a class reunion, we may be able to help you locate old classmates. Reach out and let us know about your plans.</p>
+                        <p style="margin-top:12px"><a href="mailto:alumni@livoniastmichael.org">Contact the alumni office →</a></p>
+                    </div>
+                </div>
+
+            </aside>
+        </div>
+    </main>
+
+    <!-- ════════════════════════════════════════
+         GET INVOLVED — ENGAGEMENT OPPORTUNITIES
+    ════════════════════════════════════════ -->
+    <section class="fw-section engage-section" id="get-involved">
+        <div class="fw-section-inner">
+            <div class="fw-section-header">
+                <div class="fw-eyebrow">Get Back to SMA</div>
+                <h2>Come Back. Connect. Inspire.</h2>
+                <p>Your story matters here. Step inside the school and see what's happening today — then share the wisdom your St. Michael foundation helped you build.</p>
+            </div>
+
+            <div class="cards-grid">
+
+                <!-- Card 1: Pizza Party -->
+                <div class="engage-card">
+                    <div class="engage-icon">
+                        <!-- People / group icon -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                        </svg>
+                    </div>
+                    <span class="engage-tag">Classroom Experience</span>
+                    <h3>Sponsor a Pizza Party</h3>
+                    <p>Treat a class to pizza and spend an afternoon with today's St. Michael students. See firsthand how teachers are educating the next generation — and share your own story as a proud SMA alum. A small gesture that leaves a lasting impression on both sides.</p>
+                    <a href="mailto:alumni@livoniastmichael.org?subject=Pizza Party Sponsor" class="btn-engage">Sign Up to Sponsor</a>
+                </div>
+
+                <!-- Card 2: Donuts After Mass -->
+                <div class="engage-card">
+                    <div class="engage-icon">
+                        <!-- Cross / faith icon -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 5h2v3h3v2h-3v3h-2v-3H8V8h3V5zm1-4C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"/>
+                        </svg>
+                    </div>
+                    <span class="engage-tag">Wednesday Morning</span>
+                    <h3>Donuts After All-School Mass</h3>
+                    <p>Every Wednesday, the whole school gathers for Mass. Sponsor donuts for the community afterward and experience what faith, fellowship, and joy look like at SMA today — just the way you remember it, maybe even better.</p>
+                    <a href="mailto:alumni@livoniastmichael.org?subject=Donut Sponsor - Wednesday Mass" class="btn-engage">Sponsor a Wednesday</a>
+                </div>
+
+                <!-- Card 3: Speak to 8th Grade -->
+                <div class="engage-card">
+                    <div class="engage-icon">
+                        <!-- Graduation cap icon -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
+                        </svg>
+                    </div>
+                    <span class="engage-tag">8th Grade Mentorship</span>
+                    <h3>Where to Take Your Future</h3>
+                    <p>You were once sitting where they are now. Come speak to this year's 8th grade class about high school, career, and life beyond SMA — and how the foundation St. Michael gave you shaped the road you've traveled.</p>
+                    <a href="mailto:alumni@livoniastmichael.org?subject=8th Grade Speaker Volunteer" class="btn-engage">Volunteer to Speak</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════
+         WAYS TO GIVE
+    ════════════════════════════════════════ -->
+    <section class="fw-section give-section" id="ways-to-give">
+        <div class="fw-section-inner">
+            <div class="fw-section-header">
+                <div class="fw-eyebrow">Support St. Michael</div>
+                <h2>Give Back to the School<br>That Gave You So Much</h2>
+                <p>Your investment in St. Michael today ensures tomorrow's students get the same foundation you did. Every gift — in any form — makes a real difference.</p>
+            </div>
+
+            <div class="cards-grid">
+
+                <!-- Card 1: Tuition Assistance -->
+                <div class="give-card">
+                    <div class="give-icon">
+                        <!-- Heart icon -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </div>
+                    <h3>Support Tuition Assistance</h3>
+                    <p>A Catholic education should be within reach for every family who wants one. Your gift helps ensure no child is turned away for financial reasons. Any amount helps — every dollar goes directly to a family in need.</p>
+                    <div class="donation-amounts" role="group" aria-label="Select donation amount">
+                        <button class="amt-btn" data-amount="25">$25</button>
+                        <button class="amt-btn" data-amount="50">$50</button>
+                        <button class="amt-btn selected" data-amount="100">$100</button>
+                        <button class="amt-btn" data-amount="250">$250</button>
+                        <button class="amt-btn" data-amount="500">$500</button>
+                        <button class="amt-btn" data-amount="other">Other</button>
+                    </div>
+                    <a href="mailto:alumni@livoniastmichael.org?subject=Tuition Assistance Gift" class="btn-give">Give Now</a>
+                </div>
+
+                <!-- Card 2: Classroom Supplies -->
+                <div class="give-card">
+                    <div class="give-icon">
+                        <!-- Pencil / edit icon -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.9959.9959 0 000-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </div>
+                    <h3>Support Classroom Supplies</h3>
+                    <p>St. Michael's teachers pour themselves into every lesson. Help stock their classrooms with what they need — art materials, science kits, books, and technology — so great teaching never has to wait on a budget.</p>
+                    <a href="mailto:alumni@livoniastmichael.org?subject=Classroom Supplies Donation" class="btn-give">Support Our Teachers</a>
+                </div>
+
+                <!-- Card 3: SMA Apparel -->
+                <div class="give-card">
+                    <div class="give-icon">
+                        <!-- Star / spirit icon -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
+                    </div>
+                    <h3>Show Your Knight Pride</h3>
+                    <p>Wear your SMA story with pride. Shop official St. Michael apparel — t-shirts, hoodies, and gear for the whole family. Every purchase puts the SMA name out in the world and helps support the school you love.</p>
+                    <a href="https://school.livoniastmichael.org" target="_blank" rel="noopener" class="btn-give">Shop SMA Apparel →</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="site-footer">
+        <p><strong>St. Michael the Archangel Catholic School</strong></p>
+        <p style="margin-top:6px">11311 Hubbard &bull; Livonia, MI 48150 &bull; (734) 261-1455</p>
+        <p style="margin-top:8px">
+            <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a> &bull;
+            <a href="https://www.facebook.com/livoniastmichaelSMAC" target="_blank" rel="noopener">Facebook</a> &bull;
+            <a href="https://www.youtube.com/channel/UCCKsGGu6Qxatik9E_DVpopQ" target="_blank" rel="noopener">YouTube</a>
+        </p>
+        <p style="margin-top:12px;font-size:12px;color:rgba(255,255,255,0.45)">
+            &copy; 2026 St. Michael the Archangel Catholic School. All rights reserved.
+        </p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('alumniForm');
+        const successMsg = document.getElementById('successMsg');
+
+        const requiredFields = [
+            { id: 'firstName',    errId: 'err-firstName',    validate: v => v.trim().length > 0 },
+            { id: 'lastName',     errId: 'err-lastName',     validate: v => v.trim().length > 0 },
+            { id: 'gradYear',     errId: 'err-gradYear',     validate: v => /^\d{4}$/.test(v.trim()) },
+            { id: 'jobTitle',     errId: 'err-jobTitle',     validate: v => v.trim().length > 0 },
+            { id: 'employer',     errId: 'err-employer',     validate: v => v.trim().length > 0 },
+            { id: 'email',        errId: 'err-email',        validate: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
+            { id: 'state',        errId: 'err-state',        validate: v => v !== '' },
+        ];
+
+        function validateField(field) {
+            const el = document.getElementById(field.id);
+            const err = document.getElementById(field.errId);
+            const valid = field.validate(el.value);
+            el.classList.toggle('invalid', !valid);
+            err.style.display = valid ? 'none' : 'block';
+            return valid;
+        }
+
+        function validateConsent() {
+            const checked = document.querySelector('input[name="shareConsent"]:checked');
+            const err = document.getElementById('err-shareConsent');
+            const valid = !!checked;
+            err.style.display = valid ? 'none' : 'block';
+            return valid;
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let allValid = true;
+
+            requiredFields.forEach(f => {
+                if (!validateField(f)) allValid = false;
+            });
+
+            if (!validateConsent()) allValid = false;
+
+            if (allValid) {
+                form.style.display = 'none';
+                successMsg.style.display = 'block';
+                successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                const firstError = form.querySelector('.invalid, .field-error[style*="block"]');
+                if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+
+        // Clear validation on input
+        requiredFields.forEach(f => {
+            const el = document.getElementById(f.id);
+            el.addEventListener('input', () => validateField(f));
+            el.addEventListener('change', () => validateField(f));
+        });
+
+        document.querySelectorAll('input[name="shareConsent"]').forEach(r => {
+            r.addEventListener('change', validateConsent);
+        });
+
+        // ── Donation amount pill selection ──
+        document.querySelectorAll('.donation-amounts').forEach(group => {
+            group.querySelectorAll('.amt-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    group.querySelectorAll('.amt-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
