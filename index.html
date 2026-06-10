@@ -11,16 +11,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0B2A4A;
-            --bg-alt: rgba(255,255,255,0.02);
-            --bg-card: rgba(255,255,255,0.04);
+            --bg: #071E36;
+            --bg-alt: rgba(255,255,255,0.025);
+            --bg-card: rgba(255,255,255,0.05);
             --gold: #d4af37;
             --gold-light: #f0c84a;
             --gold-dim: #b8942e;
             --gold-subtle: rgba(212,175,55,0.12);
             --border: rgba(212,175,55,0.22);
             --text-body: rgba(212,175,55,0.78);
-            --nav-h: 72px;
+            --nav-h: 68px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -65,7 +65,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 3rem;
-            background: rgba(11,42,74,0.92);
+            background: rgba(7,30,54,0.95);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--border);
@@ -146,7 +146,7 @@
             color: var(--text-body);
             line-height: 1.75;
             max-width: 600px;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .gold-rule {
@@ -158,13 +158,13 @@
 
         /* ── HERO ── */
         #hero {
-            min-height: 100vh;
+            min-height: 92vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: calc(var(--nav-h) + 2rem) 2rem 5rem;
+            padding: calc(var(--nav-h) + 1rem) 2rem 3.5rem;
         }
 
         #hero::after {
@@ -182,7 +182,7 @@
             letter-spacing: 0.4em;
             text-transform: uppercase;
             color: var(--gold-dim);
-            margin-bottom: 1.75rem;
+            margin-bottom: 1.25rem;
             opacity: 0;
             animation: fadeUp 0.8s ease 0.2s forwards;
         }
@@ -210,7 +210,7 @@
         .hero-rule {
             width: 80px; height: 2px;
             background: var(--gold);
-            margin: 2.5rem auto;
+            margin: 1.75rem auto;
             opacity: 0;
             animation: scaleIn 0.8s ease 0.9s forwards;
         }
@@ -228,7 +228,7 @@
             font-size: 1rem;
             color: var(--gold-dim);
             letter-spacing: 0.08em;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
             opacity: 0;
             animation: fadeUp 0.8s ease 1.3s forwards;
         }
@@ -236,7 +236,7 @@
         .hero-actions {
             display: flex;
             gap: 1.25rem;
-            margin-top: 3rem;
+            margin-top: 2rem;
             flex-wrap: wrap;
             justify-content: center;
             opacity: 0;
@@ -283,25 +283,26 @@
 
         /* ── ABOUT ── */
         #about {
-            padding: 8rem 2rem;
-            background: linear-gradient(180deg, transparent 0%, var(--bg-alt) 50%, transparent 100%);
+            padding: 5rem 2rem;
+            background: rgba(255,255,255,0.018);
+            border-top: 1px solid var(--border);
         }
 
         .about-grid {
             display: grid;
-            grid-template-columns: 220px 1fr;
-            gap: 6rem;
+            grid-template-columns: 200px 1fr;
+            gap: 4rem;
             align-items: start;
         }
 
         .about-monogram {
-            width: 180px; height: 180px;
+            width: 160px; height: 160px;
             border: 2px solid var(--border);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.75rem;
             position: relative;
         }
 
@@ -348,19 +349,19 @@
         }
 
         /* ── SERVICES ── */
-        #services { padding: 8rem 2rem; }
+        #services { padding: 5rem 2rem; border-top: 1px solid var(--border); }
 
         .services-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.75rem;
-            margin-top: 3rem;
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
 
         .service-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            padding: 2.75rem 2.25rem;
+            padding: 2rem 1.75rem;
             position: relative;
             overflow: hidden;
             transition: all 0.35s ease;
@@ -390,11 +391,11 @@
 
         .service-num {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: 2.75rem;
+            font-size: 2.25rem;
             font-weight: 700;
             color: rgba(212,175,55,0.14);
             line-height: 1;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .service-title {
@@ -429,11 +430,12 @@
 
         /* ── EXPERIENCE ── */
         #experience {
-            padding: 8rem 2rem;
-            background: linear-gradient(180deg, transparent 0%, var(--bg-alt) 50%, transparent 100%);
+            padding: 5rem 2rem;
+            background: rgba(255,255,255,0.018);
+            border-top: 1px solid var(--border);
         }
 
-        .timeline { margin-top: 3rem; position: relative; }
+        .timeline { margin-top: 2rem; position: relative; }
 
         .timeline::before {
             content: '';
@@ -445,7 +447,7 @@
 
         .timeline-item {
             padding-left: 3rem;
-            margin-bottom: 4rem;
+            margin-bottom: 2.5rem;
             position: relative;
         }
 
@@ -495,17 +497,17 @@
         .timeline-bullets li::before { content: '›'; position: absolute; left: 0; color: var(--gold-dim); }
 
         /* ── SKILLS ── */
-        #skills { padding: 8rem 2rem; }
+        #skills { padding: 5rem 2rem; border-top: 1px solid var(--border); }
 
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.75rem;
-            margin-top: 3rem;
+            gap: 1.25rem;
+            margin-top: 2rem;
         }
 
         .skill-cat {
-            padding: 2.5rem;
+            padding: 1.75rem;
             border: 1px solid var(--border);
             background: var(--bg-card);
         }
@@ -533,8 +535,9 @@
 
         /* ── PHILOSOPHY ── */
         #philosophy {
-            padding: 8rem 2rem;
-            background: linear-gradient(180deg, transparent 0%, var(--bg-alt) 50%, transparent 100%);
+            padding: 5rem 2rem;
+            background: rgba(255,255,255,0.018);
+            border-top: 1px solid var(--border);
         }
 
         .philosophy-body { max-width: 720px; }
@@ -547,7 +550,7 @@
         }
 
         /* ── CONTACT ── */
-        #contact { padding: 8rem 2rem; }
+        #contact { padding: 5rem 2rem; border-top: 1px solid var(--border); }
 
         .contact-center {
             text-align: center;
@@ -746,7 +749,7 @@
                 position: fixed;
                 top: var(--nav-h);
                 left: 0; right: 0;
-                background: rgba(11,42,74,0.98);
+                background: rgba(7,30,54,0.98);
                 padding: 2rem 1.5rem;
                 gap: 1.5rem;
                 border-bottom: 1px solid var(--border);
