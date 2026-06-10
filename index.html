@@ -1057,7 +1057,7 @@
         // Active nav highlight on scroll
         const navSections = ['hero','about','services','experience','skills','philosophy','contact']
             .map(id => document.getElementById(id)).filter(Boolean);
-        const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+        const navHighlightLinks = document.querySelectorAll('.nav-links a[href^="#"]');
 
         function updateNav() {
             const mid = window.innerHeight * 0.45;
@@ -1065,7 +1065,7 @@
             navSections.forEach(sec => {
                 if (sec.getBoundingClientRect().top <= mid) active = sec;
             });
-            navLinks.forEach(a => {
+            navHighlightLinks.forEach(a => {
                 const match = a.getAttribute('href') === '#' + active.id;
                 a.classList.toggle('active', match);
             });
