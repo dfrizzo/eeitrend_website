@@ -700,6 +700,61 @@
 
         .footer-copy { font-size: 0.8rem; color: var(--gold-dim); }
 
+        /* ── SCROLL INDICATOR ── */
+        .scroll-nav {
+            position: fixed;
+            right: 1.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 150;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            align-items: center;
+        }
+
+        .scroll-nav-dot {
+            position: relative;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(212,175,55,0.25);
+            border: 1px solid rgba(212,175,55,0.35);
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .scroll-nav-dot:hover,
+        .scroll-nav-dot.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            transform: scale(1.35);
+        }
+
+        .scroll-nav-dot .dot-label {
+            position: absolute;
+            right: calc(100% + 10px);
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .scroll-nav-dot:hover .dot-label { opacity: 1; }
+
+        .scroll-nav-dot.active .dot-label {
+            opacity: 0.6;
+        }
+
+        @media (max-width: 1024px) { .scroll-nav { display: none; } }
+
         /* ── ANIMATIONS ── */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(24px); }
@@ -1021,6 +1076,17 @@
         </div>
     </section>
 
+    <!-- SCROLL INDICATOR -->
+    <nav class="scroll-nav" id="scroll-nav" aria-label="Page sections">
+        <a class="scroll-nav-dot active" data-target="hero"        href="#hero">        <span class="dot-label">Top</span></a>
+        <a class="scroll-nav-dot"        data-target="about"       href="#about">       <span class="dot-label">About</span></a>
+        <a class="scroll-nav-dot"        data-target="services"    href="#services">    <span class="dot-label">Services</span></a>
+        <a class="scroll-nav-dot"        data-target="experience"  href="#experience">  <span class="dot-label">Experience</span></a>
+        <a class="scroll-nav-dot"        data-target="skills"      href="#skills">      <span class="dot-label">Skills</span></a>
+        <a class="scroll-nav-dot"        data-target="philosophy"  href="#philosophy">  <span class="dot-label">Philosophy</span></a>
+        <a class="scroll-nav-dot"        data-target="contact"     href="#contact">     <span class="dot-label">Contact</span></a>
+    </nav>
+
     <!-- FOOTER -->
     <footer>
         <span class="footer-brand">EEITREND</span>
@@ -1045,6 +1111,23 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
         document.querySelectorAll('.reveal, .reveal-group').forEach(el => observer.observe(el));
+
+        // Scroll indicator
+        const sections = ['hero','about','services','experience','skills','philosophy','contact']
+            .map(id => document.getElementById(id)).filter(Boolean);
+        const dots = document.querySelectorAll('.scroll-nav-dot');
+
+        function updateDots() {
+            const mid = window.innerHeight * 0.5;
+            let active = sections[0];
+            sections.forEach(sec => {
+                if (sec.getBoundingClientRect().top <= mid) active = sec;
+            });
+            dots.forEach(d => d.classList.toggle('active', d.dataset.target === active.id));
+        }
+
+        window.addEventListener('scroll', updateDots, { passive: true });
+        updateDots();
 
     </script>
 </body>
