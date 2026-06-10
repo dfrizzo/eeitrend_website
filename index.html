@@ -100,6 +100,13 @@
 
         .nav-links a:hover { opacity: 1; color: var(--gold-light); }
 
+        .nav-links a.active {
+            opacity: 1;
+            color: var(--gold-light);
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 2px;
+        }
+
         .nav-cta {
             padding: 0.45rem 1.2rem;
             border: 1px solid var(--border);
@@ -108,6 +115,7 @@
         }
 
         .nav-cta:hover { background: var(--gold-subtle) !important; border-color: var(--gold) !important; }
+        .nav-cta.active { border-color: var(--gold) !important; background: var(--gold-subtle) !important; }
 
         .hamburger {
             display: none;
@@ -700,61 +708,6 @@
 
         .footer-copy { font-size: 0.8rem; color: var(--gold-dim); }
 
-        /* ── SCROLL INDICATOR ── */
-        .scroll-nav {
-            position: fixed;
-            right: 1.25rem;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 150;
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
-            align-items: center;
-            width: fit-content;
-        }
-
-        .scroll-nav-dot {
-            position: relative;
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: rgba(212,175,55,0.22);
-            border: 1px solid rgba(212,175,55,0.35);
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease;
-            text-decoration: none;
-        }
-
-        .scroll-nav-dot:hover,
-        .scroll-nav-dot.active {
-            background: var(--gold);
-            border-color: var(--gold);
-            transform: scale(1.4);
-        }
-
-        .scroll-nav-dot .dot-label {
-            position: absolute;
-            right: calc(100% + 10px);
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.65rem;
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--gold);
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease;
-            background: rgba(7,30,54,0.85);
-            padding: 0.2rem 0.5rem;
-        }
-
-        .scroll-nav-dot:hover .dot-label { opacity: 1; }
-
-        @media (max-width: 1100px) { .scroll-nav { display: none; } }
-
         /* ── ANIMATIONS ── */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(24px); }
@@ -1076,17 +1029,6 @@
         </div>
     </section>
 
-    <!-- SCROLL INDICATOR -->
-    <nav class="scroll-nav" id="scroll-nav" aria-label="Page sections">
-        <a class="scroll-nav-dot active" data-target="hero"        href="#hero">        <span class="dot-label">Top</span></a>
-        <a class="scroll-nav-dot"        data-target="about"       href="#about">       <span class="dot-label">About</span></a>
-        <a class="scroll-nav-dot"        data-target="services"    href="#services">    <span class="dot-label">Services</span></a>
-        <a class="scroll-nav-dot"        data-target="experience"  href="#experience">  <span class="dot-label">Experience</span></a>
-        <a class="scroll-nav-dot"        data-target="skills"      href="#skills">      <span class="dot-label">Skills</span></a>
-        <a class="scroll-nav-dot"        data-target="philosophy"  href="#philosophy">  <span class="dot-label">Philosophy</span></a>
-        <a class="scroll-nav-dot"        data-target="contact"     href="#contact">     <span class="dot-label">Contact</span></a>
-    </nav>
-
     <!-- FOOTER -->
     <footer>
         <span class="footer-brand">EEITREND</span>
@@ -1112,22 +1054,25 @@
 
         document.querySelectorAll('.reveal, .reveal-group').forEach(el => observer.observe(el));
 
-        // Scroll indicator
-        const sections = ['hero','about','services','experience','skills','philosophy','contact']
+        // Active nav highlight on scroll
+        const navSections = ['hero','about','services','experience','skills','philosophy','contact']
             .map(id => document.getElementById(id)).filter(Boolean);
-        const dots = document.querySelectorAll('.scroll-nav-dot');
+        const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
 
-        function updateDots() {
-            const mid = window.innerHeight * 0.5;
-            let active = sections[0];
-            sections.forEach(sec => {
+        function updateNav() {
+            const mid = window.innerHeight * 0.45;
+            let active = navSections[0];
+            navSections.forEach(sec => {
                 if (sec.getBoundingClientRect().top <= mid) active = sec;
             });
-            dots.forEach(d => d.classList.toggle('active', d.dataset.target === active.id));
+            navLinks.forEach(a => {
+                const match = a.getAttribute('href') === '#' + active.id;
+                a.classList.toggle('active', match);
+            });
         }
 
-        window.addEventListener('scroll', updateDots, { passive: true });
-        updateDots();
+        window.addEventListener('scroll', updateNav, { passive: true });
+        updateNav();
 
     </script>
 </body>
