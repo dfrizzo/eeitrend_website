@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Advisory | EEITREND</title>
+    <meta name="description" content="Independent technology director and advisory board member for PE-backed and growth-stage companies – David Rizzo / EEITREND.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0B2A4A;
+            --bg-alt: rgba(255,255,255,0.02);
+            --bg-card: rgba(255,255,255,0.04);
+            --gold: #d4af37;
+            --gold-light: #f0c84a;
+            --gold-dim: #b8942e;
+            --gold-subtle: rgba(212,175,55,0.12);
+            --border: rgba(212,175,55,0.22);
+            --text-body: rgba(212,175,55,0.78);
+            --nav-h: 72px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--gold);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle at 15% 50%, rgba(212,175,55,0.07) 0%, transparent 50%),
+                radial-gradient(circle at 85% 20%, rgba(244,208,63,0.05) 0%, transparent 50%);
+            animation: bgShift 28s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes bgShift {
+            0%,100% { transform: translate(0,0) rotate(0deg); }
+            33%      { transform: translate(3%,5%) rotate(60deg); }
+            66%      { transform: translate(-3%,3%) rotate(120deg); }
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-h);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 3rem;
+            background: rgba(11,42,74,0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: var(--gold); text-decoration: none; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s, color 0.2s; }
+        .nav-links a:hover { opacity: 1; color: var(--gold-light); }
+        .nav-cta { padding: 0.45rem 1.2rem; border: 1px solid var(--border); opacity: 1 !important; }
+        .nav-cta:hover { background: var(--gold-subtle) !important; border-color: var(--gold) !important; }
+        .hamburger { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+
+        /* SHARED */
+        section { position: relative; z-index: 10; }
+        .section-inner { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+        .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.75rem; }
+        .section-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; color: var(--gold); line-height: 1.2; margin-bottom: 1.25rem; }
+        .gold-rule { width: 56px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin-bottom: 2rem; }
+
+        /* PAGE HERO */
+        .page-hero {
+            min-height: 55vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: calc(var(--nav-h) + 4rem) 2rem 5rem;
+            position: relative;
+        }
+
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 10%; right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .page-hero-inner { max-width: 1000px; margin: 0 auto; width: 100%; }
+
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--gold-dim); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3rem; transition: color 0.2s; opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards; }
+        .back-link:hover { color: var(--gold); }
+
+        .page-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+        .page-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 700; color: var(--gold); line-height: 1.1; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 1s ease 0.35s forwards; }
+        .page-subtitle { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--text-body); line-height: 1.7; max-width: 620px; opacity: 0; animation: fadeUp 1s ease 0.55s forwards; }
+
+        /* CONTENT */
+        .content-section { padding: 6rem 2rem; }
+        .content-section.alt { background: linear-gradient(180deg, transparent 0%, var(--bg-alt) 50%, transparent 100%); }
+
+        .body-text p { font-size: 1.05rem; line-height: 1.85; color: var(--text-body); margin-bottom: 1.5rem; }
+
+        /* STAT BAR */
+        .stat-bar {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item { display: flex; flex-direction: column; gap: 0.35rem; }
+        .stat-number { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; color: var(--gold); line-height: 1; }
+        .stat-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-dim); }
+
+        /* PROBLEM GRID */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .problem-card {
+            padding: 2rem;
+            border-left: 2px solid var(--gold-dim);
+            background: var(--bg-card);
+        }
+
+        .problem-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--gold); margin-bottom: 0.5rem; }
+        .problem-desc { font-size: 0.92rem; line-height: 1.7; color: rgba(212,175,55,0.62); }
+
+        /* ADVISORY VALUE */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.75rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            padding: 2.5rem 2rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .value-card:hover {
+            border-color: rgba(212,175,55,0.45);
+            background: rgba(212,175,55,0.06);
+            transform: translateY(-4px);
+        }
+
+        .value-numeral { font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-style: italic; color: var(--gold-dim); margin-bottom: 0.75rem; letter-spacing: 0.05em; }
+        .value-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-weight: 600; color: var(--gold); margin-bottom: 0.75rem; }
+        .value-desc { font-size: 0.92rem; line-height: 1.75; color: rgba(212,175,55,0.62); }
+
+        /* ENGAGEMENT MODELS */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.75rem;
+            margin-top: 3rem;
+        }
+
+        .model-card {
+            padding: 2.5rem 2rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
+
+        .model-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .model-card:hover {
+            border-color: rgba(212,175,55,0.45);
+            background: rgba(212,175,55,0.06);
+            transform: translateY(-4px);
+        }
+
+        .model-tag { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 1.25rem; }
+        .model-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-weight: 600; color: var(--gold); margin-bottom: 0.75rem; }
+        .model-desc { font-size: 0.92rem; line-height: 1.75; color: rgba(212,175,55,0.62); }
+
+        /* AUDIENCE QUOTES */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .audience-block {
+            border-left: 2px solid var(--gold-dim);
+            padding: 1.5rem 2rem;
+            background: var(--bg-card);
+        }
+
+        .audience-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 1rem; }
+        .audience-quote { font-size: 1rem; line-height: 1.8; color: var(--text-body); font-style: italic; }
+
+        /* CTA */
+        .cta-strip { padding: 6rem 2rem; text-align: center; }
+        .cta-strip .section-title { margin-bottom: 1rem; }
+        .cta-strip p { font-size: 1.05rem; color: var(--text-body); max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.7; }
+        .cta-actions { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
+
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; }
+        .btn-primary { background: var(--gold); color: var(--bg); border: 2px solid var(--gold); }
+        .btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,175,55,0.28); }
+        .btn-outline { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
+        .btn-outline:hover { background: var(--gold-subtle); transform: translateY(-2px); }
+
+        /* FOOTER */
+        footer { position: relative; z-index: 10; border-top: 1px solid var(--border); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; }
+        .footer-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .footer-copy { font-size: 0.8rem; color: var(--gold-dim); }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* MOBILE */
+        @media (max-width: 900px) {
+            .models-grid { grid-template-columns: 1fr; }
+            .problem-grid { grid-template-columns: 1fr; }
+            .value-grid { grid-template-columns: 1fr; }
+            .stat-bar { gap: 2rem; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 0 1.5rem; }
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: rgba(11,42,74,0.98); padding: 2rem 1.5rem; gap: 1.5rem; border-bottom: 1px solid var(--border); z-index: 199; }
+            footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="nav-brand">EEITREND</a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">&#9776;</button>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <a href="index.html" class="back-link">&#8592; Back to Home</a>
+            <p class="page-eyebrow">Service &nbsp;·&nbsp; 04</p>
+            <h1 class="page-title">Board Advisory</h1>
+            <p class="page-subtitle">The technology voice your board has been missing.</p>
+            <div class="stat-bar">
+                <div class="stat-item">
+                    <span class="stat-number">30</span>
+                    <span class="stat-label">Years Enterprise Software</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">2&times;</span>
+                    <span class="stat-label">Cybersecurity CTO</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">PE-Backed Transformations</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <section class="content-section">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">Overview</p>
+                <h2 class="section-title">An Independent Technology Voice at the Board Level</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <div class="body-text reveal">
+                <p>Most boards have the financial and legal coverage they need. Few have an independent voice who has actually led technology organizations through AI transformation, PE-backed pressure, and security-critical growth.</p>
+                <p>Advisory relationships are not one-size-fits-all. I structure engagements around what the board actually needs—not a retainer that looks good on paper.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE PROBLEM -->
+    <section class="content-section alt">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">The Problem</p>
+                <h2 class="section-title">What Boards Are Being Asked to Govern — Without the Context to Govern It</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card reveal">
+                    <h3 class="problem-title">AI Spend Without Accountability</h3>
+                    <p class="problem-desc">Boards are approving multi-million dollar AI investments with no framework to evaluate whether they are generating measurable business value—or simply accelerating burn.</p>
+                </div>
+                <div class="problem-card reveal">
+                    <h3 class="problem-title">Security Posture Blind Spots</h3>
+                    <p class="problem-desc">Cyber risk is now a board-level fiduciary issue. Without an independent operator's lens, boards are relying solely on the CISO and the CTO they hired—a structural conflict.</p>
+                </div>
+                <div class="problem-card reveal">
+                    <h3 class="problem-title">Engineering Health You Can't See</h3>
+                    <p class="problem-desc">Velocity metrics and roadmap slides can hide deteriorating technical debt, talent attrition, or architectural decisions that will take years to unwind and millions to fix.</p>
+                </div>
+                <div class="problem-card reveal">
+                    <h3 class="problem-title">M&amp;A Technology Risk</h3>
+                    <p class="problem-desc">Due diligence rarely surfaces the integration complexity that will consume twelve to eighteen months of engineering capacity post-close. The gap lives in architecture, not financials.</p>
+                </div>
+                <div class="problem-card reveal">
+                    <h3 class="problem-title">CTO Succession &amp; Capability</h3>
+                    <p class="problem-desc">When a CTO relationship breaks down or the company outgrows its leadership, boards need an independent voice who can assess what's needed—not just who's available.</p>
+                </div>
+                <div class="problem-card reveal">
+                    <h3 class="problem-title">Legacy Infrastructure Exposure</h3>
+                    <p class="problem-desc">Mainframe and legacy systems represent concentrated operational risk that modern boards rarely understand—but increasingly own through their portfolio companies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADVISORY VALUE -->
+    <section class="content-section">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">Advisory Value</p>
+                <h2 class="section-title">Five Areas Where an Independent Technology Director Changes the Conversation</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <div class="value-grid">
+                <div class="value-card reveal">
+                    <p class="value-numeral">I</p>
+                    <h3 class="value-title">AI Strategy &amp; Governance</h3>
+                    <p class="value-desc">I help boards understand what AI investment should actually produce and how to hold leadership accountable for it. My AI Feature P&amp;L framework gives boards a concrete lens for evaluating ROI claims before they become sunk costs.</p>
+                </div>
+                <div class="value-card reveal">
+                    <p class="value-numeral">II</p>
+                    <h3 class="value-title">Cybersecurity Oversight</h3>
+                    <p class="value-desc">Having led engineering at two cybersecurity-native organizations, I can assess security posture, evaluate vendor claims, and probe the CISO-CTO relationship with firsthand operational credibility—not a framework checklist.</p>
+                </div>
+                <div class="value-card reveal">
+                    <p class="value-numeral">III</p>
+                    <h3 class="value-title">PE-Backed Portfolio Environments</h3>
+                    <p class="value-desc">I have operated inside PE-backed companies through growth, restructuring, and exit. I understand the pressure applied to engineering organizations and where shortcuts taken today become crisis points in year three.</p>
+                </div>
+                <div class="value-card reveal">
+                    <p class="value-numeral">IV</p>
+                    <h3 class="value-title">M&amp;A Technology Integration</h3>
+                    <p class="value-desc">Technical due diligence surfaces risks. Post-close integration surfaces reality. I bridge both—helping boards understand what they're actually acquiring and what it will cost to integrate it into the business.</p>
+                </div>
+                <div class="value-card reveal">
+                    <p class="value-numeral">V</p>
+                    <h3 class="value-title">SaaS Scalability &amp; Engineering Org Health</h3>
+                    <p class="value-desc">I translate engineering team health, architecture quality, and platform scalability into board-level language so directors can ask better questions and evaluate honest answers when they get them.</p>
+                </div>
+                <div class="value-card reveal">
+                    <p class="value-numeral">VI</p>
+                    <h3 class="value-title">Mainframe &amp; Legacy Modernization</h3>
+                    <p class="value-desc">A differentiated lens for financial services, insurance, and government-adjacent portfolio companies. Legacy infrastructure is operational risk masquerading as a maintenance line item—I know exactly where to look.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENGAGEMENT MODELS -->
+    <section class="content-section alt">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">How I Work With Boards</p>
+                <h2 class="section-title">Engagement Models</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <div class="models-grid">
+                <div class="model-card reveal">
+                    <p class="model-tag">Public &amp; Private Boards</p>
+                    <h3 class="model-title">Independent Director</h3>
+                    <p class="model-desc">Formal board seat with fiduciary responsibility. I bring an independent technology voice to board deliberations, governance committees, and strategic planning cycles alongside my operational credibility in cybersecurity and AI.</p>
+                </div>
+                <div class="model-card reveal">
+                    <p class="model-tag">Growth Stage &amp; PE Portfolio</p>
+                    <h3 class="model-title">Technical Advisory Board Member</h3>
+                    <p class="model-desc">Structured advisory relationship without board-level fiduciary duty. I engage on technology strategy, roadmap review, and leadership assessment—with quarterly touchpoints or as needed around key decisions.</p>
+                </div>
+                <div class="model-card reveal">
+                    <p class="model-tag">M&amp;A &amp; Investment Contexts</p>
+                    <h3 class="model-title">Transaction &amp; Due Diligence Support</h3>
+                    <p class="model-desc">Targeted engagement around a specific event, acquisition, investment round, or leadership transition. I provide independent technical assessment and board-level translation of what the findings actually mean for the business.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW I DESCRIBE THIS -->
+    <section class="content-section">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">How I Describe This</p>
+                <h2 class="section-title">What I Tell Boards and the Firms That Advise Them</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <div class="audience-grid">
+                <div class="audience-block reveal">
+                    <p class="audience-label">For PE Firms &amp; Portfolio Boards</p>
+                    <p class="audience-quote">"I help portfolio company boards understand technology risk before it becomes a headline—whether that's AI spend accountability, security posture, or an engineering organization that has quietly outgrown its leadership."</p>
+                </div>
+                <div class="audience-block reveal">
+                    <p class="audience-label">For Growth-Stage Companies</p>
+                    <p class="audience-quote">"I bring an independent technology perspective to the board table—helping you evaluate your roadmap, your team, and your bets the way an experienced operator would, not a consultant who hasn't shipped software in a decade."</p>
+                </div>
+                <div class="audience-block reveal">
+                    <p class="audience-label">For Board Placement Firms</p>
+                    <p class="audience-quote">"I'm a multi-company CTO with hands-on experience in cybersecurity, AI strategy, and PE-backed growth. I'm available for independent director and advisory board roles where technology governance is a board-level priority—not an afterthought."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-strip">
+        <div class="reveal">
+            <p class="section-label">Start a Conversation</p>
+            <h2 class="section-title">Let's Talk About Your Board's Needs</h2>
+            <p>Whether you're a PE firm evaluating portfolio technology risk, a company preparing for its next stage of growth, or a board placement firm building a shortlist, I welcome a direct conversation.</p>
+            <div class="cta-actions">
+                <a href="mailto:david@eeitrend.com" class="btn btn-primary">Request an Introduction</a>
+                <a href="index.html#contact" class="btn btn-outline">Contact Page</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <a href="index.html" class="footer-brand">EEITREND</a>
+        <span class="footer-copy">&copy; 2026 EEITREND LLC. All rights reserved.</span>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks  = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
