@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud &amp; AI Cost Optimization | EEITREND</title>
+    <meta name="description" content="Identify, manage, and optimize costs across cloud providers and AI workloads for PE-backed and enterprise organizations – David Rizzo / EEITREND.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0B2A4A;
+            --bg-alt: rgba(255,255,255,0.02);
+            --bg-card: rgba(255,255,255,0.04);
+            --gold: #d4af37;
+            --gold-light: #f0c84a;
+            --gold-dim: #b8942e;
+            --gold-subtle: rgba(212,175,55,0.12);
+            --border: rgba(212,175,55,0.22);
+            --text-body: rgba(212,175,55,0.78);
+            --nav-h: 72px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--gold);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle at 15% 50%, rgba(212,175,55,0.07) 0%, transparent 50%),
+                radial-gradient(circle at 85% 20%, rgba(244,208,63,0.05) 0%, transparent 50%);
+            animation: bgShift 28s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes bgShift {
+            0%,100% { transform: translate(0,0) rotate(0deg); }
+            33%      { transform: translate(3%,5%) rotate(60deg); }
+            66%      { transform: translate(-3%,3%) rotate(120deg); }
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-h);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 3rem;
+            background: rgba(11,42,74,0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: var(--gold); text-decoration: none; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s, color 0.2s; }
+        .nav-links a:hover { opacity: 1; color: var(--gold-light); }
+        .nav-cta { padding: 0.45rem 1.2rem; border: 1px solid var(--border); opacity: 1 !important; }
+        .nav-cta:hover { background: var(--gold-subtle) !important; border-color: var(--gold) !important; }
+        .hamburger { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+
+        /* SHARED */
+        section { position: relative; z-index: 10; }
+        .section-inner { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+        .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.75rem; }
+        .section-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; color: var(--gold); line-height: 1.2; margin-bottom: 1.25rem; }
+        .gold-rule { width: 56px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin-bottom: 2rem; }
+
+        /* PAGE HERO */
+        .page-hero {
+            min-height: 55vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: calc(var(--nav-h) + 4rem) 2rem 5rem;
+            position: relative;
+        }
+
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 10%; right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .page-hero-inner { max-width: 1000px; margin: 0 auto; width: 100%; }
+
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--gold-dim); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3rem; transition: color 0.2s; opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards; }
+        .back-link:hover { color: var(--gold); }
+
+        .page-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+        .page-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 700; color: var(--gold); line-height: 1.1; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 1s ease 0.35s forwards; }
+        .page-subtitle { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--text-body); line-height: 1.7; max-width: 620px; opacity: 0; animation: fadeUp 1s ease 0.55s forwards; }
+
+        /* CONTENT */
+        .content-section { padding: 6rem 2rem; }
+        .content-section.alt { background: linear-gradient(180deg, transparent 0%, var(--bg-alt) 50%, transparent 100%); }
+
+        .body-text p { font-size: 1.05rem; line-height: 1.85; color: var(--text-body); margin-bottom: 1.5rem; }
+
+        /* PROBLEM GRID */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .problem-card {
+            padding: 2rem;
+            border-left: 2px solid var(--gold-dim);
+            background: var(--bg-card);
+        }
+
+        .problem-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 600; color: var(--gold); margin-bottom: 0.5rem; }
+        .problem-desc { font-size: 0.92rem; line-height: 1.7; color: rgba(212,175,55,0.62); }
+
+        /* ENGAGEMENT MODELS */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.75rem;
+            margin-top: 3rem;
+        }
+
+        .model-card {
+            padding: 2.5rem 2rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
+
+        .model-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .model-card:hover {
+            border-color: rgba(212,175,55,0.45);
+            background: rgba(212,175,55,0.06);
+            transform: translateY(-4px);
+        }
+
+        .model-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-weight: 600; color: var(--gold); margin-bottom: 0.75rem; }
+        .model-desc { font-size: 0.92rem; line-height: 1.75; color: rgba(212,175,55,0.62); }
+
+        /* DELIVERABLES LIST */
+        .two-col-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem 3rem;
+            margin-top: 2rem;
+        }
+
+        .two-col-list li { list-style: none; font-size: 0.95rem; line-height: 1.65; color: var(--text-body); padding-left: 1.25rem; position: relative; }
+        .two-col-list li::before { content: '›'; position: absolute; left: 0; color: var(--gold-dim); }
+
+        /* CTA */
+        .cta-strip { padding: 6rem 2rem; text-align: center; }
+        .cta-strip .section-title { margin-bottom: 1rem; }
+        .cta-strip p { font-size: 1.05rem; color: var(--text-body); max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.7; }
+        .cta-actions { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
+
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 2rem; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; }
+        .btn-primary { background: var(--gold); color: var(--bg); border: 2px solid var(--gold); }
+        .btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,175,55,0.28); }
+        .btn-outline { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
+        .btn-outline:hover { background: var(--gold-subtle); transform: translateY(-2px); }
+
+        /* FOOTER */
+        footer { position: relative; z-index: 10; border-top: 1px solid var(--border); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; }
+        .footer-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .footer-copy { font-size: 0.8rem; color: var(--gold-dim); }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* MOBILE */
+        @media (max-width: 900px) { .models-grid { grid-template-columns: 1fr; } .problem-grid { grid-template-columns: 1fr; } .two-col-list { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) {
+            nav { padding: 0 1.5rem; }
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: rgba(11,42,74,0.98); padding: 2rem 1.5rem; gap: 1.5rem; border-bottom: 1px solid var(--border); z-index: 199; }
+            footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="nav-brand">EEITREND</a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">&#9776;</button>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <a href="index.html" class="back-link">&#8592; Back to Home</a>
+            <p class="page-eyebrow">Service &nbsp;·&nbsp; 05</p>
+            <h1 class="page-title">Cloud &amp; AI Cost<br>Optimization</h1>
+            <p class="page-subtitle">Spending on cloud and AI is rising faster than most organizations can measure it. The companies that win are the ones that treat cost management as a strategic discipline, not a finance problem.</p>
+        </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <section class="content-section">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">Overview</p>
+                <h2 class="section-title">You Can't Optimize What You Can't See</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <div class="body-text reveal">
+                <p>Cloud and AI costs share the same structural problem: they accumulate fast, they're easy to misattribute, and by the time they appear on a finance report, the spending decisions that caused them are months old. Most organizations don't have a cost problem. They have a visibility problem.</p>
+                <p>I help companies identify where costs are actually coming from, build the accountability structures to manage them in real time, and establish the optimization disciplines that prevent waste from compounding as workloads and AI features scale. This is not a tool implementation engagement. It is a strategic and operational practice built around how your business actually makes spending decisions.</p>
+                <p>The goal is not to spend less. It is to spend accurately, with full visibility into what each dollar of cloud and AI infrastructure is actually producing for the business.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHERE COSTS HIDE -->
+    <section class="content-section alt">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">The Problem</p>
+                <h2 class="section-title">Where Cloud and AI Costs Accumulate Without Accountability</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card reveal">
+                    <h3 class="problem-title">Invisible AI Inference Costs</h3>
+                    <p class="problem-desc">Token consumption at production scale is non-linear and rarely modeled before deployment. A feature that looks affordable in a pilot can become a significant cost driver once it runs against real user volume, with no mechanism to attribute the spend back to a specific product decision.</p>
+                </div>
+                <div class="problem-card reveal">
+                    <h3 class="problem-title">Unattributed Cloud Spend</h3>
+                    <p class="problem-desc">Compute, storage, and data transfer costs pool into shared infrastructure accounts where no product team owns a specific line item. Engineering makes architectural decisions with real cost implications that finance cannot see until the invoice arrives.</p>
+                </div>
+                <div class="problem-card reveal">
+                    <h3 class="problem-title">Consumption Model Blindspots</h3>
+                    <p class="problem-desc">The shift from per-seat licensing to consumption-based pricing has made AI and cloud cost forecasting genuinely difficult. Budgets built on old assumptions applied to new pricing models are budgets built on sand.</p>
+                </div>
+                <div class="problem-card reveal">
+                    <h3 class="problem-title">Scaling Without Cost Architecture</h3>
+                    <p class="problem-desc">Growth-stage and PE-backed companies scale workloads and add AI features faster than they build the cost attribution infrastructure to understand what they're spending. The discipline gap compounds: every quarter without attribution is a quarter of decisions made without economic signal.</p>
+                </div>
+                <div class="problem-card reveal">
+                    <h3 class="problem-title">Reserved Capacity Misalignment</h3>
+                    <p class="problem-desc">Reserved instance and committed use discount strategies require accurate workload forecasting. Organizations that over-reserve waste capital. Those that under-reserve pay on-demand rates for predictable workloads they could have discounted significantly.</p>
+                </div>
+                <div class="problem-card reveal">
+                    <h3 class="problem-title">Third Party and SaaS Sprawl</h3>
+                    <p class="problem-desc">Cloud vendor relationships are one layer of a much larger cost picture. Data platforms, observability tools, security vendors, and AI APIs each add consumption-based costs that aggregate into significant spend with no consolidated view of total technology cost of ownership.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT I DO -->
+    <section class="content-section">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">How I Help</p>
+                <h2 class="section-title">Building a Cost Management Practice, Not a One-Time Audit</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <div class="models-grid">
+                <div class="model-card reveal">
+                    <h3 class="model-title">Cost Visibility Assessment</h3>
+                    <p class="model-desc">A structured review of your current cloud and AI spend across all providers and workloads. I identify where costs are attributed, where they are pooled, where visibility is missing, and which spending patterns represent the highest optimization opportunity.</p>
+                </div>
+                <div class="model-card reveal">
+                    <h3 class="model-title">Attribution Architecture</h3>
+                    <p class="model-desc">Designing and implementing the tagging strategy, account structure, and tooling that makes every dollar of cloud and AI spend traceable to a product, team, or feature. This is the foundation that makes all downstream optimization work possible.</p>
+                </div>
+                <div class="model-card reveal">
+                    <h3 class="model-title">AI Feature Cost Modeling</h3>
+                    <p class="model-desc">Applying the Feature Economics Model to your AI portfolio — projecting production-scale inference costs before deployment, building per-feature P&amp;Ls, and establishing the review cadence that keeps leadership informed of unit economics as workloads evolve.</p>
+                </div>
+                <div class="model-card reveal">
+                    <h3 class="model-title">Optimization Roadmap</h3>
+                    <p class="model-desc">A prioritized plan for reducing waste across compute, storage, data transfer, and AI workloads. Includes reserved capacity analysis, rightsizing recommendations, architectural changes with quantified impact, and vendor renegotiation guidance.</p>
+                </div>
+                <div class="model-card reveal">
+                    <h3 class="model-title">FinOps Practice Build</h3>
+                    <p class="model-desc">Standing up the organizational discipline to sustain cost management over time — defining ownership, establishing review cadences, creating the reporting that connects engineering decisions to financial outcomes, and building the culture of cost accountability.</p>
+                </div>
+                <div class="model-card reveal">
+                    <h3 class="model-title">Board and Investor Reporting</h3>
+                    <p class="model-desc">Translating cloud and AI spend into the language boards and PE sponsors need — unit economics, cost per customer, infrastructure margin, and the relationship between technology investment and business outcome. Making the numbers defensible and the trends actionable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT YOU GET -->
+    <section class="content-section alt">
+        <div class="section-inner">
+            <div class="reveal">
+                <p class="section-label">What You Get</p>
+                <h2 class="section-title">Areas of Focus</h2>
+                <div class="gold-rule"></div>
+            </div>
+            <ul class="two-col-list reveal">
+                <li>Cloud provider cost analysis across AWS, Azure, and GCP</li>
+                <li>AI inference cost modeling and production projections</li>
+                <li>Tagging strategy and attribution architecture</li>
+                <li>Reserved instance and committed use optimization</li>
+                <li>Feature-level AI cost accounting</li>
+                <li>FinOps practice design and implementation</li>
+                <li>Third party and SaaS cost consolidation</li>
+                <li>Engineering and finance alignment on cost ownership</li>
+                <li>Infrastructure margin analysis</li>
+                <li>Board-level cost reporting and unit economics</li>
+                <li>Cost governance policies and review cadences</li>
+                <li>Vendor contract and pricing model review</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-strip">
+        <div class="reveal">
+            <p class="section-label">Let's Talk</p>
+            <h2 class="section-title">Do You Know What Your Cloud and AI Is Actually Costing You?</h2>
+            <p>Most organizations don't — and the gap between what they think they're spending and what they're actually spending gets more expensive every quarter. Let's start with a conversation.</p>
+            <div class="cta-actions">
+                <a href="mailto:david@eeitrend.com" class="btn btn-primary">Email David</a>
+                <a href="index.html#contact" class="btn btn-outline">Contact Page</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <a href="index.html" class="footer-brand">EEITREND</a>
+        <span class="footer-copy">&copy; 2026 EEITREND LLC. All rights reserved.</span>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks  = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
