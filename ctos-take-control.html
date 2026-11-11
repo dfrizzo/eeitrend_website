@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTOs: Time to Take Control | EEITREND</title>
+    <meta name="description" content="Costs are rising, capacity is tightening, and most companies haven't planned for either.">
+    <link rel="canonical" href="https://eeitrend.com/ctos-take-control.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="CTOs: Time to Take Control">
+    <meta property="og:description" content="Costs are rising, capacity is tightening, and most companies haven't planned for either.">
+    <meta property="og:url" content="https://eeitrend.com/ctos-take-control.html">
+    <meta property="article:author" content="David Rizzo">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0B2A4A;
+            --bg-card: rgba(255,255,255,0.04);
+            --gold: #d4af37;
+            --gold-light: #f0c84a;
+            --gold-dim: #b8942e;
+            --gold-subtle: rgba(212,175,55,0.12);
+            --border: rgba(212,175,55,0.22);
+            --text-body: rgba(212,175,55,0.78);
+            --nav-h: 72px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--gold);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle at 15% 50%, rgba(212,175,55,0.07) 0%, transparent 50%),
+                radial-gradient(circle at 85% 20%, rgba(244,208,63,0.05) 0%, transparent 50%);
+            animation: bgShift 28s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes bgShift {
+            0%,100% { transform: translate(0,0) rotate(0deg); }
+            33%      { transform: translate(3%,5%) rotate(60deg); }
+            66%      { transform: translate(-3%,3%) rotate(120deg); }
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-h);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 3rem;
+            background: rgba(11,42,74,0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: var(--gold); text-decoration: none; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s, color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold-light); }
+        .nav-cta { padding: 0.45rem 1.2rem; border: 1px solid var(--border); opacity: 1 !important; }
+        .nav-cta:hover { background: var(--gold-subtle) !important; border-color: var(--gold) !important; }
+        .hamburger { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+
+        /* ARTICLE */
+        article { position: relative; z-index: 10; padding: calc(var(--nav-h) + 4rem) 2rem 2rem; }
+        .article-inner { max-width: 760px; margin: 0 auto; }
+
+        .article-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 1rem; }
+        .article-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; color: var(--gold); line-height: 1.15; margin-bottom: 0.75rem; }
+        .article-subtitle { font-size: 1.1rem; line-height: 1.6; color: var(--text-body); margin-bottom: 1.5rem; }
+        .article-meta { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; font-size: 0.85rem; color: var(--gold-dim); letter-spacing: 0.05em; margin-bottom: 1.5rem; }
+        .article-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2.5rem; }
+        .article-tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dim); padding: 0.2rem 0.6rem; border: 1px solid var(--border); border-radius: 2px; }
+
+        .gold-rule { width: 60px; height: 2px; background: var(--gold); margin: 2rem 0 2.25rem; }
+
+        /* BODY TEXT */
+        .article-body p { font-size: 1.02rem; line-height: 1.8; color: var(--text-body); margin-bottom: 1.4rem; }
+        .article-body p em { color: var(--gold); font-style: italic; }
+        .article-body p strong { color: var(--gold); font-weight: 600; }
+
+        .post-h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.7rem; font-weight: 600; color: var(--gold); line-height: 1.25; margin: 2.75rem 0 1rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+
+        /* PULL QUOTE */
+        .post-quote {
+            border-left: 2px solid var(--gold);
+            margin: 2.5rem 0;
+            padding: 0.75rem 0 0.75rem 1.5rem;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--gold);
+        }
+
+        /* CALLOUT */
+        .callout {
+            border: 1px solid var(--border);
+            border-top: 2px solid var(--gold);
+            background: var(--bg-card);
+            padding: 1.5rem 1.75rem;
+            margin: 2rem 0;
+        }
+        .callout-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            margin-bottom: 0.75rem;
+        }
+        .callout p { margin: 0; font-size: 0.98rem; color: var(--text-body); line-height: 1.75; }
+        .callout p + p { margin-top: 0.85rem; }
+        .callout p strong { color: var(--gold); }
+
+        /* STRESS TEST NUMBERED LIST */
+        .stress-list { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; margin: 1.75rem 0 2rem; }
+        .stress-item {
+            display: grid;
+            grid-template-columns: 2.5rem 1fr;
+            gap: 1.25rem;
+            padding: 1.5rem 1.75rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+        .stress-num {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: rgba(212,175,55,0.22);
+            line-height: 1;
+            padding-top: 0.1rem;
+        }
+        .stress-content { display: flex; flex-direction: column; gap: 0.5rem; }
+        .stress-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-weight: 600; color: var(--gold); }
+        .stress-body { font-size: 0.97rem; line-height: 1.75; color: var(--text-body); }
+        .stress-body strong { color: var(--gold); font-weight: 600; }
+
+        .article-body a { color: var(--gold); text-decoration: underline; text-decoration-color: var(--gold-dim); text-underline-offset: 3px; transition: color 0.2s; }
+        .article-body a:hover { color: var(--gold-light); }
+
+        /* POST FOOTER */
+        .article-footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .article-footer .btn { display: inline-block; padding: 0.7rem 1.4rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; color: var(--gold); border: 1px solid var(--border); transition: background 0.3s, border-color 0.3s; }
+        .article-footer .btn:hover { background: var(--gold-subtle); border-color: var(--gold); }
+
+        /* FOOTER */
+        footer { position: relative; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 2rem 3rem; border-top: 1px solid var(--border); background: rgba(11,42,74,0.6); }
+        .footer-brand { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
+        .footer-copy { font-size: 0.8rem; color: var(--gold-dim); }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            nav { padding: 0 1.5rem; }
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: rgba(11,42,74,0.98); padding: 2rem 1.5rem; gap: 1.5rem; border-bottom: 1px solid var(--border); z-index: 199; }
+            article { padding: calc(var(--nav-h) + 2.5rem) 1.5rem 2rem; }
+            .article-title { font-size: 1.85rem; }
+            .post-h2 { font-size: 1.4rem; }
+            .stress-item { grid-template-columns: 1fr; gap: 0.5rem; }
+            .stress-num { font-size: 1.25rem; }
+            footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="nav-brand">EEITREND</a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#experience">Experience</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li>
+            <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">&#9776;</button>
+    </nav>
+
+    <!-- ARTICLE -->
+    <article>
+        <div class="article-inner">
+
+            <p class="article-eyebrow">AI &middot; Strategy &middot; CTO &middot; Cost Optimization</p>
+            <h1 class="article-title">CTOs: Time to Take Control</h1>
+            <p class="article-subtitle">Costs are rising, capacity is tightening, and most companies haven&rsquo;t planned for either.</p>
+
+            <div class="article-meta">
+                <span>7 min read</span>
+            </div>
+
+            <div class="article-tags">
+                <span class="article-tag">AI</span>
+                <span class="article-tag">Strategy</span>
+                <span class="article-tag">CTO</span>
+                <span class="article-tag">Cost Optimization</span>
+            </div>
+
+            <div class="gold-rule"></div>
+
+            <div class="article-body">
+
+                <p>Leading an engineering organization is challenging. You&rsquo;re constantly weighing ROI, time to market, and sustainability. They rarely point in the same direction.</p>
+
+                <p>AI introduced a new set of challenges which are only getting more complicated.</p>
+
+                <p>Every technology I&rsquo;ve watched move through the enterprise over the last thirty years has followed the same arc. Mainframe to client-server. On-prem to cloud. First comes the excitement. Then comes the invoice.</p>
+
+                <p>AI is getting its invoice now.</p>
+
+                <p>Gartner&rsquo;s 2026 Hype Cycle for AI says it plainly: investment remains strong, but value realization is uneven. Generative AI sits in the trough of disillusionment &mdash; the stage where the excitement wears off and early adopters start reporting performance problems and weak ROI.</p>
+
+                <p>I don&rsquo;t think that&rsquo;s bad news. But I do think most companies are walking into it unprepared, for reasons that have less to do with the technology than with economics and physics.</p>
+
+                <h2 class="post-h2">How we got here</h2>
+
+                <p>For three years, adoption was rapid and unbounded. Every vendor bolted on a copilot. Every team got a license. Every board asked, &ldquo;What&rsquo;s our AI strategy?&rdquo; Pilots multiplied faster than anyone could measure them.</p>
+
+                <p>Very few people asked what it would cost when the pilots became production. Almost no one asked whether the capacity would be there.</p>
+
+                <p>That was rational at the time. Prices were falling. Providers were competing for share and subsidizing usage to win it. The working assumption, never stated, rarely questioned, was that AI would get cheaper and more abundant every year, like every other compute curve we&rsquo;ve ridden. That assumption is breaking in two places.</p>
+
+                <h2 class="post-h2">Break one: the bill</h2>
+
+                <p>Here&rsquo;s the paradox. The price of a token keeps falling. The bill keeps rising.</p>
+
+                <p>Gartner has a name for it: the Inference Paradox. In August, it projected that AI inference costs per agentic workflow will rise more than fivefold through 2028 even as per-token prices drop. The reason is simple. A multistep agent that plans, calls tools, checks its own work and tries again consumes far more tokens than a chatbot answering a question. As Gartner&rsquo;s Will Sommer put it, &ldquo;Each successive generation of AI capability will necessitate more, and often more expensive, tokens.&rdquo;</p>
+
+                <p>The software vendors are adjusting too. Microsoft raised list prices on select commercial Microsoft 365 subscriptions in July. Across the market, AI features are moving into higher tiers and showing up as surcharges at renewal.</p>
+
+                <blockquote class="post-quote">Your CFO doesn&rsquo;t experience any of this as tokens. They experience it as an overrun.</blockquote>
+
+                <h2 class="post-h2">Break two: the capacity</h2>
+
+                <p>The second break is physical.</p>
+
+                <p>Between 30% and 50% of the large data centers scheduled to come online this year are expected to be delayed, according to Sightline Climate, because of power constraints, equipment shortages and local opposition. Capital isn&rsquo;t the problem. Goldman Sachs tallies roughly $650 billion committed by the hyperscalers for 2026. The problem is transformers, switchgear, grid interconnects and permits. You can&rsquo;t fix a grid connection queue with a software release.</p>
+
+                <p>When demand grows faster than supply, two things happen. Prices go up, and access gets rationed. Both are already happening.</p>
+
+                <p>AWS raised prices on its EC2 Capacity Blocks, reserved GPU capacity, by roughly 15% in January and 20% in July, with another adjustment in October. AWS is candid that these prices move with supply and demand. Worth noting: standard price-protection language didn&rsquo;t cover them.</p>
+
+                <p>Rationing is subtler. It shows up as rate limits, queueing, slower responses at peak and the best models gated behind premium tiers. If a customer-facing workflow depends on a two-second response, what happens when it takes twenty? Or doesn&rsquo;t come back at all?</p>
+
+                <p>To be fair, analysts differ on whether these constraints are already limiting AI deployment or simply delaying the buildout. I&rsquo;d plan for the constraint either way. Being wrong in that direction is cheap. Being wrong in the other direction is not.</p>
+
+                <h2 class="post-h2">What this is not</h2>
+
+                <p>This isn&rsquo;t an argument that AI failed.</p>
+
+                <p>The trough of disillusionment isn&rsquo;t where technologies go to die. It&rsquo;s where the tourists leave and the operators get to work. There&rsquo;s a plateau of productivity on the other side, and it&rsquo;s real. Gartner still forecasts worldwide AI spending of $2.52 trillion in 2026, up 44%. The money isn&rsquo;t leaving. Discipline is arriving.</p>
+
+                <p>The companies that come out the other side in good shape won&rsquo;t be the ones that spent the most. They&rsquo;ll be the ones that knew what they were spending it on.</p>
+
+                <h2 class="post-h2">The AI Stress Test</h2>
+
+                <p>After 2008, banks started running stress tests for a simple reason: plan for the conditions you fear, not the ones you hope for. Apply the same discipline to your AI portfolio. Five tests.</p>
+
+                <ol class="stress-list">
+                    <li class="stress-item">
+                        <span class="stress-num">1</span>
+                        <div class="stress-content">
+                            <span class="stress-title">Visibility &mdash; can you see all of it?</span>
+                            <p class="stress-body">List every place AI runs in the business: direct API usage, AI features embedded in vendor products, tools teams bought on a credit card, agents in production. For each one &mdash; who owns it, what it costs per month, what it&rsquo;s for. Most organizations can&rsquo;t produce this list quickly. That is the first finding.</p>
+                        </div>
+                    </li>
+                    <li class="stress-item">
+                        <span class="stress-num">2</span>
+                        <div class="stress-content">
+                            <span class="stress-title">Unit economics &mdash; what does an outcome cost?</span>
+                            <p class="stress-body">Not cost per token. Not cost per seat. Cost per resolved ticket, per reviewed contract, per shipped feature. If you can&rsquo;t price the outcome, you can&rsquo;t tell whether a doubling in AI costs kills the business case or barely registers. This is the core of the Feature Economics Model &mdash; measure AI at the level where the business actually makes money.</p>
+                        </div>
+                    </li>
+                    <li class="stress-item">
+                        <span class="stress-num">3</span>
+                        <div class="stress-content">
+                            <span class="stress-title">Workload tiering &mdash; which ones matter?</span>
+                            <p class="stress-body">Sort every AI workload into three buckets: mission-critical (customer-facing, revenue-bearing), productive (meaningful internal gain) and experimental. Then right-size the model to the job. Not every task needs a frontier model. Classification, extraction and summarization often run fine on smaller, cheaper models, sometimes on your own infrastructure. Save the scarce, expensive capacity for the work that earns it.</p>
+                        </div>
+                    </li>
+                    <li class="stress-item">
+                        <span class="stress-num">4</span>
+                        <div class="stress-content">
+                            <span class="stress-title">Contract exposure &mdash; what did you actually sign?</span>
+                            <p class="stress-body">Pull every AI-related contract and upcoming renewal. Look for usage-based pricing, uncapped overages, what price protection covers and, more importantly, what it excludes, features likely to move tiers at renewal, and capacity commitments you&rsquo;re on the hook for. The AWS example is the lesson: protection covers what the vendor chooses not to touch.</p>
+                        </div>
+                    </li>
+                    <li class="stress-item">
+                        <span class="stress-num">5</span>
+                        <div class="stress-content">
+                            <span class="stress-title">Degradation &mdash; what happens when it slows down?</span>
+                            <p class="stress-body">For each mission-critical workload, write down the plan if latency triples, if your provider rate-limits you, or if the price doubles at renewal. A fallback model. A second provider. Cached responses. A human path. If the honest answer is &ldquo;the process stops,&rdquo; you&rsquo;ve found your highest-priority risk.</p>
+                        </div>
+                    </li>
+                </ol>
+
+                <p>None of this requires new budget. It requires a CTO, a CFO and a few weeks of honest work.</p>
+
+                <h2 class="post-h2">Start now</h2>
+
+                <p>Disillusionment phases reward preparation and punish assumptions. And this one won&rsquo;t resolve in a quarter. Grid equipment and interconnects run on multi-year timelines.</p>
+
+                <p>If your AI strategy assumes costs will fall and capacity will be there when you need it, you&rsquo;re planning for a market that no longer exists.</p>
+
+                <p>Run the stress test now, while it&rsquo;s still a planning exercise. Next year it may be an incident review.</p>
+
+            </div>
+
+            <div class="article-footer">
+                <a href="blog.html" class="btn">&#8592; All Posts</a>
+                <a href="ai-validation-gap.html" class="btn">How Naive Are You? &#8594;</a>
+            </div>
+
+        </div>
+    </article>
+
+    <!-- FOOTER -->
+    <footer>
+        <a href="index.html" class="footer-brand">EEITREND</a>
+        <span class="footer-copy">&copy; 2026 EEITREND LLC. All rights reserved.</span>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks  = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+    </script>
+</body>
+</html>
